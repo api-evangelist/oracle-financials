@@ -1,0 +1,584 @@
+openapi: 3.1.0
+info:
+  title: Oracle Financials General Ledger API
+  description: >-
+    REST API for Oracle Fusion Cloud Financials General Ledger, providing
+    programmatic access to journal batches, journal entries, ledger balances,
+    currency rates, chart of accounts filters, and budgetary control. The API
+    supports creating, retrieving, updating, and deleting journal batches,
+    viewing account balances for any account combination or account group, and
+    managing currency conversion rates used across the financial system.
+  version: '11.13.18.05'
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+    email: support@oracle.com
+  license:
+    name: Oracle Cloud Services Agreement
+    url: https://www.oracle.com/corporate/contracts/cloud-services/
+  termsOfService: https://www.oracle.com/corporate/contracts/cloud-services/
+externalDocs:
+  description: Oracle Fusion Cloud Financials REST API Documentation
+  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+servers:
+  - url: https://{instance}.oraclecloud.com
+    description: Oracle Fusion Cloud Instance
+    variables:
+      instance:
+        default: servername
+        description: Your Oracle Cloud instance identifier
+tags:
+  - name: Journal Batches
+    description: >-
+      Manage journal batches including headers, lines, action logs, and
+      attachments
+  - name: Ledger Balances
+    description: >-
+      View balance amounts for account combinations or accounts defined as part
+      of an account group
+  - name: Currency Rates
+    description: >-
+      Retrieve currency conversion rates used for multi-currency accounting
+  - name: Chart of Accounts
+    description: >-
+      Create and manage chart of accounts filters and filter criteria
+  - name: Budgetary Control
+    description: >-
+      Manage budget transactions and view budgetary control validation results
+security:
+  - bearerAuth: []
+paths:
+  /fscmRestApi/resources/11.13.18.05/journalBatches:
+    get:
+      operationId: listJournalBatches
+      summary: List journal batches
+      description: >-
+        Retrieve a collection of journal batches. Supports filtering, sorting,
+        and pagination using standard Oracle REST query parameters.
+      tags:
+        - Journal Batches
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/finder'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successful retrieval of journal batches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JournalBatch'
+                  count:
+                    type: integer
+                    description: Number of items returned
+                  hasMore:
+                    type: boolean
+                    description: Whether more items are available
+                  limit:
+                    type: integer
+                    description: Maximum number of items returned
+                  offset:
+                    type: integer
+                    description: Offset of the first item returned
+        '401':
+          description: Unauthorized - invalid or missing credentials
+        '403':
+          description: Forbidden - insufficient privileges
+  /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}:
+    get:
+      operationId: getJournalBatch
+      summary: Get a journal batch
+      description: >-
+        Retrieve a specific journal batch by its unique identifier, including
+        associated journal headers, lines, and action logs.
+      tags:
+        - Journal Batches
+      parameters:
+        - $ref: '#/components/parameters/JeBatchId'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successful retrieval of the journal batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalBatch'
+        '401':
+          description: Unauthorized - invalid or missing credentials
+        '404':
+          description: Journal batch not found
+    patch:
+      operationId: updateJournalBatch
+      summary: Update a journal batch
+      description: >-
+        Update a journal batch. Only batch completion status and reversal
+        attributes can be updated through this endpoint.
+      tags:
+        - Journal Batches
+      parameters:
+        - $ref: '#/components/parameters/JeBatchId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalBatchUpdate'
+      responses:
+        '200':
+          description: Journal batch updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JournalBatch'
+        '400':
+          description: Bad request - invalid update payload
+        '401':
+          description: Unauthorized - invalid or missing credentials
+        '404':
+          description: Journal batch not found
+    delete:
+      operationId: deleteJournalBatch
+      summary: Delete a journal batch
+      description: >-
+        Delete a specific journal batch by its unique identifier.
+      tags:
+        - Journal Batches
+      parameters:
+        - $ref: '#/components/parameters/JeBatchId'
+      responses:
+        '204':
+          description: Journal batch deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing credentials
+        '404':
+          description: Journal batch not found
+  /fscmRestApi/resources/11.13.18.05/ledgerBalances:
+    get:
+      operationId: listLedgerBalances
+      summary: List account balances
+      description: >-
+        Retrieve balance amounts for account combinations or accounts defined as
+        part of an account group. Supports filtering by ledger, period, account
+        segment values, and balance type.
+      tags:
+        - Ledger Balances
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/finder'
+      responses:
+        '200':
+          description: Successful retrieval of ledger balances
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LedgerBalance'
+                  count:
+                    type: integer
+                    description: Number of items returned
+                  hasMore:
+                    type: boolean
+                    description: Whether more items are available
+        '401':
+          description: Unauthorized - invalid or missing credentials
+  /fscmRestApi/resources/11.13.18.05/currencyRates:
+    get:
+      operationId: listCurrencyRates
+      summary: List currency rates
+      description: >-
+        Retrieve currency conversion rates. These rates are used for
+        multi-currency accounting and reporting across business units and
+        ledgers.
+      tags:
+        - Currency Rates
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/finder'
+      responses:
+        '200':
+          description: Successful retrieval of currency rates
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CurrencyRate'
+                  count:
+                    type: integer
+                    description: Number of items returned
+                  hasMore:
+                    type: boolean
+                    description: Whether more items are available
+        '401':
+          description: Unauthorized - invalid or missing credentials
+  /fscmRestApi/resources/11.13.18.05/chartOfAccountsFilters:
+    post:
+      operationId: createChartOfAccountsFilter
+      summary: Create a chart of accounts filter
+      description: >-
+        Create a new chart of accounts filter with filter criteria. Chart of
+        accounts filters are used to restrict the set of account combinations
+        available in financial transactions.
+      tags:
+        - Chart of Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChartOfAccountsFilter'
+      responses:
+        '201':
+          description: Chart of accounts filter created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChartOfAccountsFilter'
+        '400':
+          description: Bad request - invalid filter definition
+        '401':
+          description: Unauthorized - invalid or missing credentials
+  /fscmRestApi/resources/11.13.18.05/budgetaryControlResults:
+    get:
+      operationId: listBudgetaryControlResults
+      summary: List budgetary control results
+      description: >-
+        Retrieve budgetary control validation results, including budget impact
+        details for transactions that have been validated against budgets.
+      tags:
+        - Budgetary Control
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/q'
+        - $ref: '#/components/parameters/finder'
+      responses:
+        '200':
+          description: Successful retrieval of budgetary control results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BudgetaryControlResult'
+                  count:
+                    type: integer
+                    description: Number of items returned
+                  hasMore:
+                    type: boolean
+                    description: Whether more items are available
+        '401':
+          description: Unauthorized - invalid or missing credentials
+  /fscmRestApi/resources/11.13.18.05/budgetaryControlBudgetTransactions:
+    post:
+      operationId: createBudgetTransaction
+      summary: Create a budget transaction
+      description: >-
+        Create a new budgetary control budget transaction for budget entry and
+        validation.
+      tags:
+        - Budgetary Control
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetTransaction'
+      responses:
+        '201':
+          description: Budget transaction created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetTransaction'
+        '400':
+          description: Bad request - invalid transaction data
+        '401':
+          description: Unauthorized - invalid or missing credentials
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth 2.0 bearer token obtained from Oracle Identity Cloud Service
+  parameters:
+    JeBatchId:
+      name: JeBatchId
+      in: path
+      required: true
+      description: Unique identifier for the journal batch
+      schema:
+        type: integer
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 25
+    offset:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results
+      schema:
+        type: integer
+        default: 0
+    fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to include in the response
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      description: >-
+        Filter expression using Oracle REST query syntax
+      schema:
+        type: string
+    orderBy:
+      name: orderBy
+      in: query
+      description: >-
+        Comma-separated list of fields to sort by, with optional asc or desc
+      schema:
+        type: string
+    finder:
+      name: finder
+      in: query
+      description: >-
+        Named finder to execute a predefined query
+      schema:
+        type: string
+    expand:
+      name: expand
+      in: query
+      description: >-
+        Comma-separated list of child resources to expand in the response
+      schema:
+        type: string
+  schemas:
+    JournalBatch:
+      type: object
+      description: >-
+        A journal batch containing one or more journal entries for posting to
+        the general ledger
+      properties:
+        JeBatchId:
+          type: integer
+          description: Unique system-generated identifier for the journal batch
+        Name:
+          type: string
+          description: Name of the journal batch
+        Description:
+          type: string
+          description: Description of the journal batch
+        Status:
+          type: string
+          description: Current status of the journal batch
+        PostingStatus:
+          type: string
+          description: Posting status of the batch
+        ApprovalStatus:
+          type: string
+          description: Approval status of the batch
+        LedgerName:
+          type: string
+          description: Name of the ledger associated with this batch
+        LedgerId:
+          type: integer
+          description: Unique identifier of the ledger
+        AccountingPeriodName:
+          type: string
+          description: Name of the accounting period
+        DefaultEffectiveDate:
+          type: string
+          format: date
+          description: Default effective date for journals in this batch
+        CreatedBy:
+          type: string
+          description: Username of the person who created the batch
+        CreationDate:
+          type: string
+          format: date-time
+          description: Timestamp when the batch was created
+        LastUpdateDate:
+          type: string
+          format: date-time
+          description: Timestamp when the batch was last modified
+    JournalBatchUpdate:
+      type: object
+      description: >-
+        Updatable fields for a journal batch, limited to completion status and
+        reversal attributes
+      properties:
+        Status:
+          type: string
+          description: Updated status of the journal batch
+        ReversalDate:
+          type: string
+          format: date
+          description: Date for reversing the journal batch
+        ReversalPeriodName:
+          type: string
+          description: Accounting period name for the reversal
+    LedgerBalance:
+      type: object
+      description: >-
+        Account balance for a specific account combination within a ledger
+        and accounting period
+      properties:
+        LedgerId:
+          type: integer
+          description: Unique identifier of the ledger
+        LedgerName:
+          type: string
+          description: Name of the ledger
+        PeriodName:
+          type: string
+          description: Accounting period name
+        CurrencyCode:
+          type: string
+          description: ISO 4217 currency code for the balance
+          pattern: "^[A-Z]{3}$"
+        AccountCombination:
+          type: string
+          description: Account combination string
+        BeginningBalance:
+          type: number
+          description: Beginning balance for the period
+        PeriodActivity:
+          type: number
+          description: Net activity for the period
+        EndingBalance:
+          type: number
+          description: Ending balance for the period
+        AmountType:
+          type: string
+          description: Type of balance amount
+        ActualFlag:
+          type: string
+          enum:
+            - A
+            - B
+            - E
+          description: >-
+            Balance type indicator where A is actual, B is budget, and E is
+            encumbrance
+    CurrencyRate:
+      type: object
+      description: >-
+        Currency conversion rate between two currencies for a specific date
+        and rate type
+      properties:
+        FromCurrency:
+          type: string
+          description: Source currency code
+          pattern: "^[A-Z]{3}$"
+        ToCurrency:
+          type: string
+          description: Target currency code
+          pattern: "^[A-Z]{3}$"
+        ConversionDate:
+          type: string
+          format: date
+          description: Effective date of the conversion rate
+        ConversionType:
+          type: string
+          description: Type of conversion rate
+        ConversionRate:
+          type: number
+          description: Conversion rate from source to target currency
+    ChartOfAccountsFilter:
+      type: object
+      description: >-
+        A filter definition that restricts available account combinations in
+        financial transactions
+      properties:
+        FilterName:
+          type: string
+          description: Name of the chart of accounts filter
+        FilterDescription:
+          type: string
+          description: Description of the filter
+        ChartOfAccountsId:
+          type: integer
+          description: Identifier of the chart of accounts
+        EnabledFlag:
+          type: boolean
+          description: Whether the filter is currently active
+    BudgetaryControlResult:
+      type: object
+      description: >-
+        Result of budgetary control validation for a transaction
+      properties:
+        TransactionId:
+          type: integer
+          description: Identifier of the validated transaction
+        BudgetName:
+          type: string
+          description: Name of the budget used for validation
+        Status:
+          type: string
+          description: Validation result status
+        FundsAvailable:
+          type: number
+          description: Amount of funds available in the budget
+        FundsConsumed:
+          type: number
+          description: Amount of funds consumed by the transaction
+    BudgetTransaction:
+      type: object
+      description: >-
+        A budget transaction for entering or adjusting budget amounts
+      properties:
+        BudgetName:
+          type: string
+          description: Name of the budget
+        LedgerId:
+          type: integer
+          description: Unique identifier of the ledger
+        AccountingPeriod:
+          type: string
+          description: Accounting period for the budget entry
+        AccountCombination:
+          type: string
+          description: Account combination for the budget amount
+        Amount:
+          type: number
+          description: Budget amount
+        CurrencyCode:
+          type: string
+          description: ISO 4217 currency code
+          pattern: "^[A-Z]{3}$"
