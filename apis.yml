@@ -1,18 +1,24 @@
+aid: oracle-financials
 name: Oracle Financials APIs
 description: Collection of Oracle Financials Cloud APIs for financial management, accounting, and reporting
-image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
-url: https://www.oracle.com/financials/
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/oracle-financials/refs/heads/main/apis.yml
 tags:
-- Financial Management
-- ERP
-- Accounting
-- General Ledger
-- Accounts Payable
-- Accounts Receivable
-- Cash Management
-- Expense Management
+  - Financial Management
+  - ERP
+  - Accounting
+  - General Ledger
+  - Accounts Payable
+  - Accounts Receivable
+  - Cash Management
+  - Expense Management
 created: '2024-01-15'
-modified: '2024-01-15'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Oracle Financials General Ledger API
   description: Manage general ledger operations including journals, account balances, and period closings
@@ -177,7 +183,6 @@ common:
 - type: Privacy Policy
   url: https://www.oracle.com/legal/privacy/
 maintainers:
-- FN: Oracle Corporation
-  email: financials-cloud@oracle.com
-  url: https://www.oracle.com/financials/
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 include: []
