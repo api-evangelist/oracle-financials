@@ -51,7 +51,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/journalBatches:
     get:
       operationId: listJournalBatches
-      summary: List journal batches
+      summary: Oracle Financials List journal batches
       description: >-
         Retrieve a collection of journal batches. Supports filtering, sorting,
         and pagination using standard Oracle REST query parameters.
@@ -96,7 +96,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}:
     get:
       operationId: getJournalBatch
-      summary: Get a journal batch
+      summary: Oracle Financials Get a journal batch
       description: >-
         Retrieve a specific journal batch by its unique identifier, including
         associated journal headers, lines, and action logs.
@@ -119,7 +119,7 @@ paths:
           description: Journal batch not found
     patch:
       operationId: updateJournalBatch
-      summary: Update a journal batch
+      summary: Oracle Financials Update a journal batch
       description: >-
         Update a journal batch. Only batch completion status and reversal
         attributes can be updated through this endpoint.
@@ -148,7 +148,7 @@ paths:
           description: Journal batch not found
     delete:
       operationId: deleteJournalBatch
-      summary: Delete a journal batch
+      summary: Oracle Financials Delete a journal batch
       description: >-
         Delete a specific journal batch by its unique identifier.
       tags:
@@ -165,7 +165,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/ledgerBalances:
     get:
       operationId: listLedgerBalances
-      summary: List account balances
+      summary: Oracle Financials List account balances
       description: >-
         Retrieve balance amounts for account combinations or accounts defined as
         part of an account group. Supports filtering by ledger, period, account
@@ -202,7 +202,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/currencyRates:
     get:
       operationId: listCurrencyRates
-      summary: List currency rates
+      summary: Oracle Financials List currency rates
       description: >-
         Retrieve currency conversion rates. These rates are used for
         multi-currency accounting and reporting across business units and
@@ -239,7 +239,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/chartOfAccountsFilters:
     post:
       operationId: createChartOfAccountsFilter
-      summary: Create a chart of accounts filter
+      summary: Oracle Financials Create a chart of accounts filter
       description: >-
         Create a new chart of accounts filter with filter criteria. Chart of
         accounts filters are used to restrict the set of account combinations
@@ -266,7 +266,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/budgetaryControlResults:
     get:
       operationId: listBudgetaryControlResults
-      summary: List budgetary control results
+      summary: Oracle Financials List budgetary control results
       description: >-
         Retrieve budgetary control validation results, including budget impact
         details for transactions that have been validated against budgets.
@@ -301,7 +301,7 @@ paths:
   /fscmRestApi/resources/11.13.18.05/budgetaryControlBudgetTransactions:
     post:
       operationId: createBudgetTransaction
-      summary: Create a budget transaction
+      summary: Oracle Financials Create a budget transaction
       description: >-
         Create a new budgetary control budget transaction for budget entry and
         validation.
