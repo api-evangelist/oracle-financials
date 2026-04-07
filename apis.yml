@@ -10,14 +10,14 @@ image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: >-
   https://raw.githubusercontent.com/api-evangelist/oracle-financials/refs/heads/main/apis.yml
 tags:
-  - Financial Management
-  - ERP
   - Accounting
-  - General Ledger
   - Accounts Payable
   - Accounts Receivable
   - Cash Management
+  - ERP
   - Expense Management
+  - Financial Management
+  - General Ledger
 created: '2024-01-15'
 modified: '2026-03-16'
 specificationVersion: '0.19'
@@ -28,23 +28,19 @@ apis:
       closings.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
-      - General Ledger
-      - Journals
       - Account Balances
       - Chart of Accounts
+      - General Ledger
+      - Journals
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-general-ledger.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-general-ledger.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-general-ledger.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-general-ledger.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
@@ -54,8 +50,7 @@ apis:
       Manage supplier invoices, payments, and expense reports.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
       - Accounts Payable
       - Invoices
@@ -63,14 +58,11 @@ apis:
       - Suppliers
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-payables.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-payables.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-payables.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-payables.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
@@ -80,23 +72,19 @@ apis:
       Manage customer invoices, receipts, and credit management.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
       - Accounts Receivable
+      - Credit Management
       - Customer Invoices
       - Receipts
-      - Credit Management
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-receivables.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-receivables.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-receivables.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-receivables.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
@@ -106,23 +94,19 @@ apis:
       Manage cash positioning, bank statements, and reconciliation.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
-      - Cash Management
       - Bank Accounts
-      - Reconciliation
       - Cash Forecasting
+      - Cash Management
+      - Reconciliation
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-cash-management.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-cash-management.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-cash-management.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-cash-management.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
@@ -132,23 +116,19 @@ apis:
       Manage employee expenses, reimbursements, and expense reports.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
+      - Corporate Cards
       - Expense Management
       - Expense Reports
       - Reimbursements
-      - Corporate Cards
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-expenses.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-expenses.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-expenses.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-expenses.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
@@ -158,23 +138,19 @@ apis:
       Manage asset lifecycle, depreciation, and asset transfers.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
-      - Fixed Assets
-      - Depreciation
       - Asset Management
       - Asset Tracking
+      - Depreciation
+      - Fixed Assets
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-fixed-assets.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-fixed-assets.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-fixed-assets.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-fixed-assets.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
@@ -184,37 +160,30 @@ apis:
       Access financial reports, analytics, and business intelligence data.
     image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: 
-      https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
     tags:
-      - Reporting
       - Analytics
       - Business Intelligence
       - Financial Reports
+      - Reporting
     properties:
       - type: Documentation
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-financial-reporting.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-financial-reporting.html
       - type: OpenAPI
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-reporting.yaml
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/openapi-reporting.yaml
       - type: Authentication
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
     contact:
       - FN: Oracle Support
         email: support@oracle.com
         url: https://support.oracle.com
 common:
   - type: Getting Started
-    url: 
-      https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/getting-started.html
+    url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/getting-started.html
   - type: Authentication Guide
-    url: 
-      https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
+    url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
   - type: Rate Limits
-    url: 
-      https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/rate-limits.html
+    url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/rate-limits.html
   - type: Support
     url: https://support.oracle.com
   - type: Status Page

@@ -28,6 +28,15 @@ servers:
         default: servername
         description: Your Oracle Cloud instance identifier
 tags:
+  - name: Budgetary Control
+    description: >-
+      Manage budget transactions and view budgetary control validation results
+  - name: Chart of Accounts
+    description: >-
+      Create and manage chart of accounts filters and filter criteria
+  - name: Currency Rates
+    description: >-
+      Retrieve currency conversion rates used for multi-currency accounting
   - name: Journal Batches
     description: >-
       Manage journal batches including headers, lines, action logs, and
@@ -36,15 +45,6 @@ tags:
     description: >-
       View balance amounts for account combinations or accounts defined as part
       of an account group
-  - name: Currency Rates
-    description: >-
-      Retrieve currency conversion rates used for multi-currency accounting
-  - name: Chart of Accounts
-    description: >-
-      Create and manage chart of accounts filters and filter criteria
-  - name: Budgetary Control
-    description: >-
-      Manage budget transactions and view budgetary control validation results
 security:
   - bearerAuth: []
 paths:
