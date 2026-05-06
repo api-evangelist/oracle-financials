@@ -4,113 +4,74 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Oracle Financials
 providerId: oracle-financials
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Accounting
-  - Accounts Payable
-  - Accounts Receivable
-  - Cash Management
   - ERP
-  - Expense Management
   - Financial Management
-  - General Ledger
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Oracle Cloud
+  - SaaS
+description: >-
+  Oracle Financials Cloud (part of Oracle Fusion Cloud ERP) is sold as a
+  SaaS subscription via the Oracle Cloud Applications price list. Pricing is
+  per Hosted Named User per month (with separate Hosted Employee or Hosted
+  Single-Sign-On Employee user metrics for some modules) and is published on
+  the Oracle Applications Global Price List PDF rather than as an interactive
+  pricing page. There is no free, freemium, or per-API public tier; access to
+  the REST APIs is included with any active Oracle Financials Cloud
+  subscription. Engage Oracle Sales for the current per-user rate.
+sources:
+  - https://www.oracle.com/erp/financials/
+  - https://docs.oracle.com/en/cloud/saas/financials/
+  - https://www.oracle.com/applications/customer-experience/contact/
+notes: >-
+  Oracle blocks programmatic fetches of www.oracle.com pricing pages (HTTP 403).
+  Plan structure preserved as a single SaaS subscription tier plus an
+  enterprise agreement; replace per-user list price with the verified Oracle
+  Applications Global Price List value when available.
 plans:
-  - id: oracle-financials-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Oracle Financials API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+  - id: oracle-financials-cloud-subscription
+    name: Oracle Financials Cloud Subscription
+    type: subscription
+    description: >-
+      SaaS subscription to Oracle Financials Cloud, billed monthly per Hosted
+      Named User. Includes the Oracle Financials REST API surface (General
+      Ledger, Accounts Payable, Accounts Receivable, Cash Management, Fixed
+      Assets, Expense Management, Financial Reporting) at no additional
+      per-call cost.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
+      - label: Hosted Named User
+        name: hosted_named_user
+        type: subscription
+        metric: user
+        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
         unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Oracle Financials General Ledger API
-      - name: Oracle Financials Accounts Payable API
-      - name: Oracle Financials Accounts Receivable API
-      - name: Oracle Financials Cash Management API
-      - name: Oracle Financials Expense Management API
-      - name: Oracle Financials Fixed Assets API
-      - name: Oracle Financial Reporting API
-  - id: oracle-financials-pro
-    name: Professional
-    type: paid
-    description: Production tier for Oracle Financials. Provides higher quotas, priority support, and
-      access to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
+        price: contact sales
+        userMultiplied: true
+      - label: Hosted Employee
+        name: hosted_employee
+        type: subscription
+        metric: employee
+        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
         unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
+        price: contact sales
+        userMultiplied: true
+      - label: REST API Calls (included)
+        name: rest_api_calls
+        type: quota
         metric: requests
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
       - name: Oracle Financials General Ledger API
       - name: Oracle Financials Accounts Payable API
       - name: Oracle Financials Accounts Receivable API
@@ -119,44 +80,25 @@ plans:
       - name: Oracle Financials Fixed Assets API
       - name: Oracle Financial Reporting API
   - id: oracle-financials-enterprise
-    name: Enterprise
+    name: Enterprise Agreement
     type: enterprise
-    description: Custom-negotiated tier for Oracle Financials. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
+    description: >-
+      Negotiated enterprise agreement covering Oracle Financials Cloud plus
+      adjacent Fusion Cloud ERP modules (Procurement, Project Management,
+      Risk Management). Includes contractual SLAs and named technical account
+      management.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Negotiated User Volume
+        name: negotiated_users
+        type: subscription
+        metric: user
         limit: -1
-        timeFrame: month
+        timeFrame: year
         geo: configurable
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
         unit: 1
         price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-        unit: 1
-        price: custom
-        userMultiplied: false
+        userMultiplied: true
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
       - name: Oracle Financials General Ledger API
       - name: Oracle Financials Accounts Payable API
       - name: Oracle Financials Accounts Receivable API

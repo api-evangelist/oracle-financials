@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,183 +9,118 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Oracle Financials
 providerId: oracle-financials
-publisherName: Oracle Financials
-serviceCategory: API
+publisherName: Oracle America, Inc.
+serviceCategory: ERP / Financials
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Accounting
-  - Accounts Payable
-  - Accounts Receivable
-  - Cash Management
   - ERP
-  - Expense Management
   - Financial Management
-  - General Ledger
+  - Oracle Cloud
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Oracle Financials API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: >-
+  FOCUS-aligned FinOps view for Oracle Financials Cloud: a SaaS subscription
+  billed monthly per Hosted Named User / Hosted Employee. REST API access is
+  bundled with the subscription and does not generate a separate metered
+  charge. FinOps observation focuses on user-license utilization rather than
+  per-call consumption.
+sources:
+  - https://www.oracle.com/erp/financials/
+  - https://docs.oracle.com/en/cloud/saas/financials/
+notes: >-
+  No per-API meter exists. Track license seat utilization through the Fusion
+  Applications usage reports and reconcile against the contractual seat count
+  on the order document.
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Tiered Subscription
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Credit
 focusColumns:
-  ServiceName: Oracle Financials
-  ServiceCategory: Developer Tools / API
-  ProviderName: Oracle Financials
-  PublisherName: Oracle Financials
-  InvoiceIssuerName: Oracle Financials
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Oracle Financials Cloud
+  ServiceCategory: ERP / Financials
+  ProviderName: Oracle
+  PublisherName: Oracle America, Inc.
+  InvoiceIssuerName: Oracle America, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
+  PricingCategory: Subscription
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: hosted_named_user_subscription
+    description: Active Hosted Named User seats per month
+    unit: seat-month
+    aggregation: max
+    dimensions:
+      - module
+      - business_unit
+  - name: hosted_employee_subscription
+    description: Hosted Employee seats per month for employee-priced modules
+    unit: employee-month
+    aggregation: max
+    dimensions:
+      - module
+      - business_unit
+  - name: rest_api_calls
+    description: REST API calls (informational; bundled in the subscription)
     unit: request
     aggregation: sum
     dimensions:
       - api
       - endpoint
-      - tier
-      - region
       - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+  - name: file_based_data_imports
+    description: FBDI / BI Publisher bulk extracts (informational)
+    unit: job
+    aggregation: count
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
+      - module
+principles:
+  - name: Visibility
+    description: >-
+      Review Hosted Named User / Hosted Employee utilization through the
+      Fusion Applications Security Console and Manage Users area; reconcile
+      monthly against the contractual seat count.
+  - name: Allocation
+    description: >-
+      Tag user records with the consuming business unit and cost center so
+      seat cost can be allocated back to finance teams.
+  - name: Optimization
+    description: >-
+      Reclaim inactive seats, consolidate duplicate user records, and use the
+      lower-priced Hosted Employee or Hosted Single-Sign-On metrics for
+      light-touch users where the module supports them.
+  - name: Accountability
+    description: >-
+      Assign the Financials applications administrator and the FP&A finance
+      partner joint accountability for seat growth and renewal scoping.
 apis:
   - name: Oracle Financials General Ledger API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Account Balances
-      - Chart of Accounts
-      - General Ledger
-      - Journals
     serviceName: Oracle Financials General Ledger API
-    serviceCategory: API
+    serviceCategory: ERP / Financials
   - name: Oracle Financials Accounts Payable API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Accounts Payable
-      - Invoices
-      - Payments
-      - Suppliers
     serviceName: Oracle Financials Accounts Payable API
-    serviceCategory: API
+    serviceCategory: ERP / Financials
   - name: Oracle Financials Accounts Receivable API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Accounts Receivable
-      - Credit Management
-      - Customer Invoices
-      - Receipts
     serviceName: Oracle Financials Accounts Receivable API
-    serviceCategory: API
+    serviceCategory: ERP / Financials
   - name: Oracle Financials Cash Management API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Bank Accounts
-      - Cash Forecasting
-      - Cash Management
-      - Reconciliation
     serviceName: Oracle Financials Cash Management API
-    serviceCategory: API
+    serviceCategory: ERP / Financials
   - name: Oracle Financials Expense Management API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Corporate Cards
-      - Expense Management
-      - Expense Reports
-      - Reimbursements
     serviceName: Oracle Financials Expense Management API
-    serviceCategory: API
+    serviceCategory: ERP / Financials
   - name: Oracle Financials Fixed Assets API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Asset Management
-      - Asset Tracking
-      - Depreciation
-      - Fixed Assets
     serviceName: Oracle Financials Fixed Assets API
-    serviceCategory: API
+    serviceCategory: ERP / Financials
   - name: Oracle Financial Reporting API
-    baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
-    tags:
-      - Analytics
-      - Business Intelligence
-      - Financial Reports
-      - Reporting
     serviceName: Oracle Financial Reporting API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+    serviceCategory: ERP / Financials
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
