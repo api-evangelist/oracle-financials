@@ -178,19 +178,19 @@ apis:
         email: support@oracle.com
         url: https://support.oracle.com
 common:
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/getting-started.html
   - type: Authentication Guide
     url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/Authentication.html
-  - type: Rate Limits
+  - type: RateLimits
     url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/rate-limits.html
   - type: Support
     url: https://support.oracle.com
-  - type: Status Page
+  - type: StatusPage
     url: https://ocistatus.oraclecloud.com
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.oracle.com/corporate/contracts/cloud-services/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.oracle.com/legal/privacy/
 maintainers:
   - FN: Kin Lane
