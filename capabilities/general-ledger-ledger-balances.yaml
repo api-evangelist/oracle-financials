@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Financials General Ledger API — Ledger Balances
+  description: 'Oracle Financials General Ledger API — Ledger Balances. 1 operations. Lead operation: Oracle Financials List
+    account balances. Self-contained Naftiko capability covering one Oracle Financials business surface.'
+  tags:
+  - Oracle Financials
+  - Ledger Balances
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_FINANCIALS_API_KEY: ORACLE_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: general-ledger-ledger-balances
+    baseUri: https://{instance}.oraclecloud.com
+    description: Oracle Financials General Ledger API — Ledger Balances business capability. Self-contained, no shared references.
+    resources:
+    - name: fscmRestApi-resources-11.13.18.05-ledgerBalances
+      path: /fscmRestApi/resources/11.13.18.05/ledgerBalances
+      operations:
+      - name: listledgerbalances
+        method: GET
+        description: Oracle Financials List account balances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: general-ledger-ledger-balances-rest
+    port: 8080
+    description: REST adapter for Oracle Financials General Ledger API — Ledger Balances. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/fscmrestapi/resources/11-13-18-05/ledgerbalances
+      name: fscmrestapi-resources-11-13-18-05-ledgerbalances
+      description: REST surface for fscmRestApi-resources-11.13.18.05-ledgerBalances.
+      operations:
+      - method: GET
+        name: listledgerbalances
+        description: Oracle Financials List account balances
+        call: general-ledger-ledger-balances.listledgerbalances
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: general-ledger-ledger-balances-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Financials General Ledger API — Ledger Balances. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-financials-list-account-balances
+      description: Oracle Financials List account balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: general-ledger-ledger-balances.listledgerbalances
+      outputParameters:
+      - type: object
+        mapping: $.

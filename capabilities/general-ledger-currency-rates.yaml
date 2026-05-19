@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Financials General Ledger API — Currency Rates
+  description: 'Oracle Financials General Ledger API — Currency Rates. 1 operations. Lead operation: Oracle Financials List
+    currency rates. Self-contained Naftiko capability covering one Oracle Financials business surface.'
+  tags:
+  - Oracle Financials
+  - Currency Rates
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_FINANCIALS_API_KEY: ORACLE_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: general-ledger-currency-rates
+    baseUri: https://{instance}.oraclecloud.com
+    description: Oracle Financials General Ledger API — Currency Rates business capability. Self-contained, no shared references.
+    resources:
+    - name: fscmRestApi-resources-11.13.18.05-currencyRates
+      path: /fscmRestApi/resources/11.13.18.05/currencyRates
+      operations:
+      - name: listcurrencyrates
+        method: GET
+        description: Oracle Financials List currency rates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: general-ledger-currency-rates-rest
+    port: 8080
+    description: REST adapter for Oracle Financials General Ledger API — Currency Rates. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/fscmrestapi/resources/11-13-18-05/currencyrates
+      name: fscmrestapi-resources-11-13-18-05-currencyrates
+      description: REST surface for fscmRestApi-resources-11.13.18.05-currencyRates.
+      operations:
+      - method: GET
+        name: listcurrencyrates
+        description: Oracle Financials List currency rates
+        call: general-ledger-currency-rates.listcurrencyrates
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: general-ledger-currency-rates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Financials General Ledger API — Currency Rates. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: oracle-financials-list-currency-rates
+      description: Oracle Financials List currency rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: general-ledger-currency-rates.listcurrencyrates
+      outputParameters:
+      - type: object
+        mapping: $.

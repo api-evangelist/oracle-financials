@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Oracle Financials General Ledger API — Journal Batches
+  description: 'Oracle Financials General Ledger API — Journal Batches. 4 operations. Lead operation: Oracle Financials List
+    journal batches. Self-contained Naftiko capability covering one Oracle Financials business surface.'
+  tags:
+  - Oracle Financials
+  - Journal Batches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ORACLE_FINANCIALS_API_KEY: ORACLE_FINANCIALS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: general-ledger-journal-batches
+    baseUri: https://{instance}.oraclecloud.com
+    description: Oracle Financials General Ledger API — Journal Batches business capability. Self-contained, no shared references.
+    resources:
+    - name: fscmRestApi-resources-11.13.18.05-journalBatches
+      path: /fscmRestApi/resources/11.13.18.05/journalBatches
+      operations:
+      - name: listjournalbatches
+        method: GET
+        description: Oracle Financials List journal batches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: fscmRestApi-resources-11.13.18.05-journalBatches-JeBatchId
+      path: /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}
+      operations:
+      - name: getjournalbatch
+        method: GET
+        description: Oracle Financials Get a journal batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatejournalbatch
+        method: PATCH
+        description: Oracle Financials Update a journal batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletejournalbatch
+        method: DELETE
+        description: Oracle Financials Delete a journal batch
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ORACLE_FINANCIALS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: general-ledger-journal-batches-rest
+    port: 8080
+    description: REST adapter for Oracle Financials General Ledger API — Journal Batches. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/fscmrestapi/resources/11-13-18-05/journalbatches
+      name: fscmrestapi-resources-11-13-18-05-journalbatches
+      description: REST surface for fscmRestApi-resources-11.13.18.05-journalBatches.
+      operations:
+      - method: GET
+        name: listjournalbatches
+        description: Oracle Financials List journal batches
+        call: general-ledger-journal-batches.listjournalbatches
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/fscmrestapi/resources/11-13-18-05/journalbatches/{jebatchid}
+      name: fscmrestapi-resources-11-13-18-05-journalbatches-jebatchid
+      description: REST surface for fscmRestApi-resources-11.13.18.05-journalBatches-JeBatchId.
+      operations:
+      - method: GET
+        name: getjournalbatch
+        description: Oracle Financials Get a journal batch
+        call: general-ledger-journal-batches.getjournalbatch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatejournalbatch
+        description: Oracle Financials Update a journal batch
+        call: general-ledger-journal-batches.updatejournalbatch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletejournalbatch
+        description: Oracle Financials Delete a journal batch
+        call: general-ledger-journal-batches.deletejournalbatch
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: general-ledger-journal-batches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Oracle Financials General Ledger API — Journal Batches. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: oracle-financials-list-journal-batches
+      description: Oracle Financials List journal batches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: general-ledger-journal-batches.listjournalbatches
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-financials-get-journal-batch
+      description: Oracle Financials Get a journal batch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: general-ledger-journal-batches.getjournalbatch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-financials-update-journal-batch
+      description: Oracle Financials Update a journal batch
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: general-ledger-journal-batches.updatejournalbatch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oracle-financials-delete-journal-batch
+      description: Oracle Financials Delete a journal batch
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: general-ledger-journal-batches.deletejournalbatch
+      outputParameters:
+      - type: object
+        mapping: $.
