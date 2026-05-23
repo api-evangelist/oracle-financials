@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CurrencyRate",
+  "title": "CurrencyRate",
+  "type": "object",
+  "description": "Currency conversion rate between two currencies for a specific date and rate type",
+  "properties": {
+    "FromCurrency": {
+      "type": "string",
+      "description": "Source currency code",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "ToCurrency": {
+      "type": "string",
+      "description": "Target currency code",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "ConversionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date of the conversion rate"
+    },
+    "ConversionType": {
+      "type": "string",
+      "description": "Type of conversion rate"
+    },
+    "ConversionRate": {
+      "type": "number",
+      "description": "Conversion rate from source to target currency"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChartOfAccountsFilter",
+  "title": "ChartOfAccountsFilter",
+  "type": "object",
+  "description": "A filter definition that restricts available account combinations in financial transactions",
+  "properties": {
+    "FilterName": {
+      "type": "string",
+      "description": "Name of the chart of accounts filter"
+    },
+    "FilterDescription": {
+      "type": "string",
+      "description": "Description of the filter"
+    },
+    "ChartOfAccountsId": {
+      "type": "integer",
+      "description": "Identifier of the chart of accounts"
+    },
+    "EnabledFlag": {
+      "type": "boolean",
+      "description": "Whether the filter is currently active"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BudgetaryControlResult",
+  "title": "BudgetaryControlResult",
+  "type": "object",
+  "description": "Result of budgetary control validation for a transaction",
+  "properties": {
+    "TransactionId": {
+      "type": "integer",
+      "description": "Identifier of the validated transaction"
+    },
+    "BudgetName": {
+      "type": "string",
+      "description": "Name of the budget used for validation"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Validation result status"
+    },
+    "FundsAvailable": {
+      "type": "number",
+      "description": "Amount of funds available in the budget"
+    },
+    "FundsConsumed": {
+      "type": "number",
+      "description": "Amount of funds consumed by the transaction"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JournalBatchUpdate",
+  "title": "JournalBatchUpdate",
+  "type": "object",
+  "description": "Updatable fields for a journal batch, limited to completion status and reversal attributes",
+  "properties": {
+    "Status": {
+      "type": "string",
+      "description": "Updated status of the journal batch"
+    },
+    "ReversalDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date for reversing the journal batch"
+    },
+    "ReversalPeriodName": {
+      "type": "string",
+      "description": "Accounting period name for the reversal"
+    }
+  }
+}

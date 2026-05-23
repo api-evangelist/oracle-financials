@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JournalBatch",
+  "title": "JournalBatch",
+  "type": "object",
+  "description": "A journal batch containing one or more journal entries for posting to the general ledger",
+  "properties": {
+    "JeBatchId": {
+      "type": "integer",
+      "description": "Unique system-generated identifier for the journal batch"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Name of the journal batch"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Description of the journal batch"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Current status of the journal batch"
+    },
+    "PostingStatus": {
+      "type": "string",
+      "description": "Posting status of the batch"
+    },
+    "ApprovalStatus": {
+      "type": "string",
+      "description": "Approval status of the batch"
+    },
+    "LedgerName": {
+      "type": "string",
+      "description": "Name of the ledger associated with this batch"
+    },
+    "LedgerId": {
+      "type": "integer",
+      "description": "Unique identifier of the ledger"
+    },
+    "AccountingPeriodName": {
+      "type": "string",
+      "description": "Name of the accounting period"
+    },
+    "DefaultEffectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Default effective date for journals in this batch"
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "Username of the person who created the batch"
+    },
+    "CreationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the batch was created"
+    },
+    "LastUpdateDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the batch was last modified"
+    }
+  }
+}

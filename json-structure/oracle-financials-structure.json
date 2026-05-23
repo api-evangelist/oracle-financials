@@ -1,0 +1,135 @@
+{
+  "provider": "Oracle Financials",
+  "providerId": "oracle-financials",
+  "kind": "json-structure",
+  "description": "Structural overview of the Oracle Financials API surface; extracted from openapi/.",
+  "schemaCount": 7,
+  "operationCount": 9,
+  "schemas": [
+    {
+      "name": "JournalBatch",
+      "type": "object",
+      "propertyCount": 13,
+      "required": []
+    },
+    {
+      "name": "JournalBatchUpdate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "LedgerBalance",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "CurrencyRate",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ChartOfAccountsFilter",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "BudgetaryControlResult",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "BudgetTransaction",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/fscmRestApi/resources/11.13.18.05/journalBatches",
+      "operationId": "listJournalBatches",
+      "summary": "Oracle Financials List journal batches",
+      "tags": [
+        "Journal Batches"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}",
+      "operationId": "getJournalBatch",
+      "summary": "Oracle Financials Get a journal batch",
+      "tags": [
+        "Journal Batches"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}",
+      "operationId": "deleteJournalBatch",
+      "summary": "Oracle Financials Delete a journal batch",
+      "tags": [
+        "Journal Batches"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}",
+      "operationId": "updateJournalBatch",
+      "summary": "Oracle Financials Update a journal batch",
+      "tags": [
+        "Journal Batches"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/fscmRestApi/resources/11.13.18.05/ledgerBalances",
+      "operationId": "listLedgerBalances",
+      "summary": "Oracle Financials List account balances",
+      "tags": [
+        "Ledger Balances"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/fscmRestApi/resources/11.13.18.05/currencyRates",
+      "operationId": "listCurrencyRates",
+      "summary": "Oracle Financials List currency rates",
+      "tags": [
+        "Currency Rates"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/fscmRestApi/resources/11.13.18.05/chartOfAccountsFilters",
+      "operationId": "createChartOfAccountsFilter",
+      "summary": "Oracle Financials Create a chart of accounts filter",
+      "tags": [
+        "Chart of Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/fscmRestApi/resources/11.13.18.05/budgetaryControlResults",
+      "operationId": "listBudgetaryControlResults",
+      "summary": "Oracle Financials List budgetary control results",
+      "tags": [
+        "Budgetary Control"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/fscmRestApi/resources/11.13.18.05/budgetaryControlBudgetTransactions",
+      "operationId": "createBudgetTransaction",
+      "summary": "Oracle Financials Create a budget transaction",
+      "tags": [
+        "Budgetary Control"
+      ]
+    }
+  ]
+}

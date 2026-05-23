@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LedgerBalance",
+  "title": "LedgerBalance",
+  "type": "object",
+  "description": "Account balance for a specific account combination within a ledger and accounting period",
+  "properties": {
+    "LedgerId": {
+      "type": "integer",
+      "description": "Unique identifier of the ledger"
+    },
+    "LedgerName": {
+      "type": "string",
+      "description": "Name of the ledger"
+    },
+    "PeriodName": {
+      "type": "string",
+      "description": "Accounting period name"
+    },
+    "CurrencyCode": {
+      "type": "string",
+      "description": "ISO 4217 currency code for the balance",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "AccountCombination": {
+      "type": "string",
+      "description": "Account combination string"
+    },
+    "BeginningBalance": {
+      "type": "number",
+      "description": "Beginning balance for the period"
+    },
+    "PeriodActivity": {
+      "type": "number",
+      "description": "Net activity for the period"
+    },
+    "EndingBalance": {
+      "type": "number",
+      "description": "Ending balance for the period"
+    },
+    "AmountType": {
+      "type": "string",
+      "description": "Type of balance amount"
+    },
+    "ActualFlag": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "E"
+      ],
+      "description": "Balance type indicator where A is actual, B is budget, and E is encumbrance"
+    }
+  }
+}

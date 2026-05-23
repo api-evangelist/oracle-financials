@@ -1,0 +1,15 @@
+name: Oracle Financials Domain Vocabulary
+provider: Oracle Financials
+providerId: oracle-financials
+description: Tag-derived vocabulary for the Oracle Financials API surface; sourced from openapi/ tags.
+terms:
+- term: Budgetary Control
+  description: Manage budget transactions and view budgetary control validation results
+- term: Chart of Accounts
+  description: Create and manage chart of accounts filters and filter criteria
+- term: Currency Rates
+  description: Retrieve currency conversion rates used for multi-currency accounting
+- term: Journal Batches
+  description: Manage journal batches including headers, lines, action logs, and attachments
+- term: Ledger Balances
+  description: View balance amounts for account combinations or accounts defined as part of an account group
