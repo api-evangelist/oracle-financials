@@ -4,7 +4,7 @@ description: Collection of Oracle Financials Cloud APIs for financial management
 type: Index
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/oracle-financials/refs/heads/main/apis.yml
 tags:
   - Accounting
