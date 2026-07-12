@@ -167,6 +167,10 @@ apis:
         email: support@oracle.com
         url: https://support.oracle.com
 common:
+  - type: DomainSecurity
+    url: security/oracle-financials-domain-security.yml
+  - type: Authentication
+    url: authentication/oracle-financials-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/oracle
   - type: GettingStarted

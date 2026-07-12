@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/oracle-financials-general-ledger-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 bearer token obtained from Oracle Identity Cloud Service
+  sources:
+  - openapi/oracle-financials-general-ledger-openapi.yml
