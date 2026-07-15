@@ -167,6 +167,8 @@ apis:
         email: support@oracle.com
         url: https://support.oracle.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/oracle-financials-agentic-access.yml
   - type: DomainSecurity
     url: security/oracle-financials-domain-security.yml
   - type: Authentication

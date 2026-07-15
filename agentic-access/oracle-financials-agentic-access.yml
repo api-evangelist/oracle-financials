@@ -1,0 +1,131 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/oracle-financials-general-ledger-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 9
+  by_action_class:
+    connected: 5
+    acting: 4
+  by_consequence:
+    read: 5
+    write: 3
+    safety-critical: 1
+  human_in_the_loop_required: 1
+operations:
+- path: /fscmRestApi/resources/11.13.18.05/journalBatches
+  method: get
+  operationId: listJournalBatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}
+  method: get
+  operationId: getJournalBatch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}
+  method: patch
+  operationId: updateJournalBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}
+  method: delete
+  operationId: deleteJournalBatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fscmRestApi/resources/11.13.18.05/ledgerBalances
+  method: get
+  operationId: listLedgerBalances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fscmRestApi/resources/11.13.18.05/currencyRates
+  method: get
+  operationId: listCurrencyRates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fscmRestApi/resources/11.13.18.05/chartOfAccountsFilters
+  method: post
+  operationId: createChartOfAccountsFilter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fscmRestApi/resources/11.13.18.05/budgetaryControlResults
+  method: get
+  operationId: listBudgetaryControlResults
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fscmRestApi/resources/11.13.18.05/budgetaryControlBudgetTransactions
+  method: post
+  operationId: createBudgetTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
