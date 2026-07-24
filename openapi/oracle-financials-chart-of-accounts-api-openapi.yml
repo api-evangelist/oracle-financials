@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Oracle Financials General Ledger Budgetary Control Chart of Accounts API
+  description: REST API for Oracle Fusion Cloud Financials General Ledger, providing programmatic access to journal batches, journal entries, ledger balances, currency rates, chart of accounts filters, and budgetary control. The API supports creating, retrieving, updating, and deleting journal batches, viewing account balances for any account combination or account group, and managing currency conversion rates used across the financial system.
+  version: 11.13.18.05
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+    email: support@oracle.com
+  license:
+    name: Oracle Cloud Services Agreement
+    url: https://www.oracle.com/corporate/contracts/cloud-services/
+  termsOfService: https://www.oracle.com/corporate/contracts/cloud-services/
+servers:
+- url: https://{instance}.oraclecloud.com
+  description: Oracle Fusion Cloud Instance
+  variables:
+    instance:
+      default: servername
+      description: Your Oracle Cloud instance identifier
+security:
+- bearerAuth: []
+tags:
+- name: Chart of Accounts
+  description: Create and manage chart of accounts filters and filter criteria
+paths:
+  /fscmRestApi/resources/11.13.18.05/chartOfAccountsFilters:
+    post:
+      operationId: createChartOfAccountsFilter
+      summary: Oracle Financials Create a chart of accounts filter
+      description: Create a new chart of accounts filter with filter criteria. Chart of accounts filters are used to restrict the set of account combinations available in financial transactions.
+      tags:
+      - Chart of Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChartOfAccountsFilter'
+      responses:
+        '201':
+          description: Chart of accounts filter created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChartOfAccountsFilter'
+        '400':
+          description: Bad request - invalid filter definition
+        '401':
+          description: Unauthorized - invalid or missing credentials
+components:
+  schemas:
+    ChartOfAccountsFilter:
+      type: object
+      description: A filter definition that restricts available account combinations in financial transactions
+      properties:
+        FilterName:
+          type: string
+          description: Name of the chart of accounts filter
+        FilterDescription:
+          type: string
+          description: Description of the filter
+        ChartOfAccountsId:
+          type: integer
+          description: Identifier of the chart of accounts
+        EnabledFlag:
+          type: boolean
+          description: Whether the filter is currently active
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Oracle Identity Cloud Service
+externalDocs:
+  description: Oracle Fusion Cloud Financials REST API Documentation
+  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html

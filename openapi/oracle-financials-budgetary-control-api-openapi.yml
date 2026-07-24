@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: Oracle Financials General Ledger Budgetary Control API
+  description: REST API for Oracle Fusion Cloud Financials General Ledger, providing programmatic access to journal batches, journal entries, ledger balances, currency rates, chart of accounts filters, and budgetary control. The API supports creating, retrieving, updating, and deleting journal batches, viewing account balances for any account combination or account group, and managing currency conversion rates used across the financial system.
+  version: 11.13.18.05
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+    email: support@oracle.com
+  license:
+    name: Oracle Cloud Services Agreement
+    url: https://www.oracle.com/corporate/contracts/cloud-services/
+  termsOfService: https://www.oracle.com/corporate/contracts/cloud-services/
+servers:
+- url: https://{instance}.oraclecloud.com
+  description: Oracle Fusion Cloud Instance
+  variables:
+    instance:
+      default: servername
+      description: Your Oracle Cloud instance identifier
+security:
+- bearerAuth: []
+tags:
+- name: Budgetary Control
+  description: Manage budget transactions and view budgetary control validation results
+paths:
+  /fscmRestApi/resources/11.13.18.05/budgetaryControlResults:
+    get:
+      operationId: listBudgetaryControlResults
+      summary: Oracle Financials List budgetary control results
+      description: Retrieve budgetary control validation results, including budget impact details for transactions that have been validated against budgets.
+      tags:
+      - Budgetary Control
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/finder'
+      responses:
+        '200':
+          description: Successful retrieval of budgetary control results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BudgetaryControlResult'
+                  count:
+                    type: integer
+                    description: Number of items returned
+                  hasMore:
+                    type: boolean
+                    description: Whether more items are available
+        '401':
+          description: Unauthorized - invalid or missing credentials
+  /fscmRestApi/resources/11.13.18.05/budgetaryControlBudgetTransactions:
+    post:
+      operationId: createBudgetTransaction
+      summary: Oracle Financials Create a budget transaction
+      description: Create a new budgetary control budget transaction for budget entry and validation.
+      tags:
+      - Budgetary Control
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetTransaction'
+      responses:
+        '201':
+          description: Budget transaction created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetTransaction'
+        '400':
+          description: Bad request - invalid transaction data
+        '401':
+          description: Unauthorized - invalid or missing credentials
+components:
+  parameters:
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results
+      schema:
+        type: integer
+        default: 0
+    fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to include in the response
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 25
+    finder:
+      name: finder
+      in: query
+      description: Named finder to execute a predefined query
+      schema:
+        type: string
+  schemas:
+    BudgetaryControlResult:
+      type: object
+      description: Result of budgetary control validation for a transaction
+      properties:
+        TransactionId:
+          type: integer
+          description: Identifier of the validated transaction
+        BudgetName:
+          type: string
+          description: Name of the budget used for validation
+        Status:
+          type: string
+          description: Validation result status
+        FundsAvailable:
+          type: number
+          description: Amount of funds available in the budget
+        FundsConsumed:
+          type: number
+          description: Amount of funds consumed by the transaction
+    BudgetTransaction:
+      type: object
+      description: A budget transaction for entering or adjusting budget amounts
+      properties:
+        BudgetName:
+          type: string
+          description: Name of the budget
+        LedgerId:
+          type: integer
+          description: Unique identifier of the ledger
+        AccountingPeriod:
+          type: string
+          description: Accounting period for the budget entry
+        AccountCombination:
+          type: string
+          description: Account combination for the budget amount
+        Amount:
+          type: number
+          description: Budget amount
+        CurrencyCode:
+          type: string
+          description: ISO 4217 currency code
+          pattern: ^[A-Z]{3}$
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from Oracle Identity Cloud Service
+externalDocs:
+  description: Oracle Fusion Cloud Financials REST API Documentation
+  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
