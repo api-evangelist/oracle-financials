@@ -1,0 +1,22 @@
+{
+  "provider": "oracle-financials",
+  "sources": [
+    "oracle-financials-budgetary-control-api-openapi.yml",
+    "oracle-financials-chart-of-accounts-api-openapi.yml",
+    "oracle-financials-currency-rates-api-openapi.yml",
+    "oracle-financials-journal-batches-api-openapi.yml",
+    "oracle-financials-ledger-balances-api-openapi.yml"
+  ],
+  "outputs": [
+    "oracle-financials-budgetary-control-api-openapi.yml",
+    "oracle-financials-chart-of-accounts-api-openapi.yml",
+    "oracle-financials-currency-rates-api-openapi.yml",
+    "oracle-financials-journal-batches-api-openapi.yml",
+    "oracle-financials-ledger-balances-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
