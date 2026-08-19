@@ -30,7 +30,7 @@ tags:
   - General Ledger
 created: '2024-01-15'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: oracle-financials:oracle-financials-budgetary-control-api
   name: Oracle Financials Budgetary Control API
