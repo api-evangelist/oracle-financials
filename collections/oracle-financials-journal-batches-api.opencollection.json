@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Oracle Financials General Ledger Budgetary Control Journal Batches API",
+    "version": "11.13.18.05"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Journal Batches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Oracle Financials List journal batches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05/journalBatches",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using Oracle REST query syntax"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to sort by, with optional asc or desc"
+              },
+              {
+                "name": "finder",
+                "value": "",
+                "type": "query",
+                "description": "Named finder to execute a predefined query"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of child resources to expand in the response"
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of journal batches. Supports filtering, sorting, and pagination using standard Oracle REST query parameters."
+        },
+        {
+          "info": {
+            "name": "Oracle Financials Get a journal batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05/journalBatches/:JeBatchId",
+            "params": [
+              {
+                "name": "JeBatchId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the journal batch"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to include in the response"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of child resources to expand in the response"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific journal batch by its unique identifier, including associated journal headers, lines, and action logs."
+        },
+        {
+          "info": {
+            "name": "Oracle Financials Update a journal batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05/journalBatches/:JeBatchId",
+            "params": [
+              {
+                "name": "JeBatchId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the journal batch"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a journal batch. Only batch completion status and reversal attributes can be updated through this endpoint."
+        },
+        {
+          "info": {
+            "name": "Oracle Financials Delete a journal batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05/journalBatches/:JeBatchId",
+            "params": [
+              {
+                "name": "JeBatchId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the journal batch"
+              }
+            ]
+          },
+          "docs": "Delete a specific journal batch by its unique identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
