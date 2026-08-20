@@ -143,6 +143,8 @@ apis:
   humanURL: https://docs.oracle.com/en/cloud/saas/financials/
   baseURL: https://your-instance.fa.us2.oraclecloud.com/fscmRestApi/resources/11.13.18.05
   tags:
+  - Ledger balances
+  tags_raw:
   - Ledger Balances
   properties:
   - type: OpenAPI
