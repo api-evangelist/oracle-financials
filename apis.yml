@@ -2,6 +2,18 @@ aid: oracle-financials
 name: Oracle Financials
 description: Collection of Oracle Financials Cloud APIs for financial management, accounting, and reporting.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -166,6 +178,9 @@ apis:
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-financial-reporting.html
 common:
+  - type: CapabilityMap
+    url: capabilities/oracle-financials-capability-edges.yml
+    name: Oracle Financials Business Capability Map
   - type: AgenticAccess
     url: agentic-access/oracle-financials-agentic-access.yml
   - type: DomainSecurity

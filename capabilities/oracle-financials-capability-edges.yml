@@ -1,0 +1,50 @@
+slug: oracle-financials
+provider: Oracle Financials
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Journal Batches
+  spec_file: oracle-financials-journal-batches-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.92
+  evidence: GET .../journalBatches listJournalBatches; PATCH updateJournalBatch
+  reason: Journal batch/entry CRUD in Oracle Fusion General Ledger is core GL journal processing.
+- tag: Ledger Balances
+  spec_file: oracle-financials-ledger-balances-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.88
+  evidence: GET .../ledgerBalances listLedgerBalances List account balances
+  reason: Retrieving GL account balances for account combinations is General Ledger Management.
+- tag: Chart of Accounts
+  spec_file: oracle-financials-chart-of-accounts-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.8
+  evidence: POST .../chartOfAccountsFilters createChartOfAccountsFilter Create a chart of accounts filter
+  reason: Chart of accounts is explicitly part of General Ledger Management; operation manipulates COA
+    filters within Fusion GL.
+- tag: Budgetary Control
+  spec_file: oracle-financials-budgetary-control-api-openapi.yml
+  capability_id: BC-230.10
+  capability_id_l1: BC-230
+  capability_name: Budgeting Management
+  confidence: 0.7
+  evidence: POST .../budgetaryControlBudgetTransactions createBudgetTransaction Create a budget transaction
+  reason: Budgetary control results and budget transactions relate to budget management/funds checking;
+    closest fit is Budgeting Management, though it also borders GL controls.
