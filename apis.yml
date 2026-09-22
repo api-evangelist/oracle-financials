@@ -178,6 +178,446 @@ apis:
     url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-fixed-assets.html
   - type: Documentation
     url: https://docs.oracle.com/en/cloud/saas/financials/23r3/farfa/api-financial-reporting.html
+- name: Oracle Accounts Payable REST API
+  description: APIs for managing supplier invoices, payments, expense reports, and procurement transactions.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/financials/
+  baseUrl: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05/
+  tags:
+  - Accounts Payable
+  - Invoices
+  - Payments
+  - Suppliers
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/api-payables.html
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/endpoints-payables.html
+  aid: oracle-financials:accounts-payable
+- name: Oracle Accounts Receivable REST API
+  description: APIs for managing customer invoices, receipts, credit memos, and revenue recognition.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/financials/
+  baseUrl: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05/
+  tags:
+  - Accounts Receivable
+  - Customers
+  - Invoices
+  - Receipts
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/api-receivables.html
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/endpoints-receivables.html
+  aid: oracle-financials:accounts-receivable
+- name: Oracle EPM Cloud REST API
+  description: REST APIs for Oracle Enterprise Performance Management Cloud including Planning, Financial
+    Consolidation and Close, Tax Reporting, and Account Reconciliation.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/
+  baseUrl: https://{instance}.oraclecloud.com/epm/rest/
+  tags:
+  - Account Reconciliation
+  - Budgeting
+  - EPM
+  - Financial Consolidation
+  - Planning
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/prest/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/prest/rest_endpoints.html
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/prest/api_authentication.html
+  aid: oracle-financials:epm-cloud
+- name: Oracle Financial Reporting REST API
+  description: APIs for creating, managing, and executing financial reports, including Smart View integration.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/
+  baseUrl: https://{instance}.oraclecloud.com/epm/rest/
+  tags:
+  - Analytics
+  - Financial Reporting
+  - Reports
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/prest/rep_rest_api_intro.html
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/prest/rest_api_financial_reporting_overview.html
+  aid: oracle-financials:reporting
+- name: Oracle FCCS REST API
+  description: APIs for Financial Consolidation and Close Cloud Service for consolidations, eliminations,
+    currency translation, and intercompany management.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/financial-consolidation-cloud/
+  baseUrl: https://{instance}.oraclecloud.com/epm/rest/
+  tags:
+  - Close Management
+  - Consolidation
+  - Currency Translation
+  - Eliminations
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financial-consolidation-cloud/fcgrs/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/financial-consolidation-cloud/fcgrs/rest_endpoints.html
+  aid: oracle-financials:fccs
+- name: Oracle ARCS REST API
+  description: APIs for Account Reconciliation Cloud Service for managing reconciliations, certifications,
+    and compliance workflows.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/account-reconcile-cloud/
+  baseUrl: https://{instance}.oraclecloud.com/epm/rest/
+  tags:
+  - Account Reconciliation
+  - Certification
+  - Compliance
+  tags_raw:
+  - Account Reconciliation
+  - Certifications
+  - Compliance
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/account-reconcile-cloud/suarc/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/account-reconcile-cloud/suarc/rest_endpoints.html
+  aid: oracle-financials:arcs
+- name: Oracle Planning REST API
+  description: APIs for Planning and Budgeting Cloud Service including data management, business rules,
+    and planning operations.
+  humanUrl: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/
+  baseUrl: https://{instance}.oraclecloud.com/epm/rest/
+  tags:
+  - Budgeting
+  - Forecasting
+  - Planning
+  - Workforce Planning
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusr/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/planning-budgeting-cloud/pfusr/rest_endpoints.html
+  aid: oracle-financials:planning
+- aid: oracle-financials:oracle-financial-applications-cash-management-api
+  name: Oracle Financials Cash Management API
+  description: Bank accounts and statements.
+  tags:
+  - Cash Management
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-financial-applications-cash-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/Authentication.html
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+- aid: oracle-financials:oracle-financial-applications-fixed-assets-api
+  name: Oracle Financials Fixed Assets API
+  description: Asset lifecycle resources.
+  tags:
+  - Fixed Assets
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-financial-applications-fixed-assets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/Authentication.html
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+- aid: oracle-financials:oracle-financial-applications-general-ledger-api
+  name: Oracle Financials General Ledger API
+  description: General Ledger journal batches and currency rates.
+  tags:
+  - General Ledger
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-financial-applications-general-ledger-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/Authentication.html
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+- aid: oracle-financials:oracle-financial-applications-payables-api
+  name: Oracle Financials Payables API
+  description: Accounts Payable invoices.
+  tags:
+  - Payables
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-financial-applications-payables-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/Authentication.html
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+- aid: oracle-financials:oracle-financial-applications-receivables-api
+  name: Oracle Financials Receivables API
+  description: Customer transactions.
+  tags:
+  - Receivables
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-financial-applications-receivables-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/24d/farfa/Authentication.html
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+- name: Oracle Financials Accounting Period Status REST API
+  description: REST API for viewing accounting period statuses in Oracle Fusion Cloud General Ledger.
+    The accounting period status list of values resource provides period details in a calendar, including
+    ledger identification, period name, and closing status values such as Open, Closed, Future Enterable,
+    Never Opened, Permanently Closed, and Close Pending.
+  image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Accounting Periods
+  - Financial Close
+  - General Ledger
+  - Period Close
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/financials/25a/farfa/op-accountingperiodstatuslov-get.html
+  - type: GettingStarted
+    url: https://docs.oracle.com/en/cloud/saas/financials/25a/farfa/Quick_Start.html
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/Authentication.html
+  - type: ChangeLog
+    url: https://docs.oracle.com/en/cloud/saas/readiness/erp/index.html
+  contact:
+  - FN: Oracle Support
+    email: support@oracle.com
+    url: https://support.oracle.com
+  aid: oracle-financials:accounting-period-status
+- name: Oracle Financials Chart of Accounts Filters REST API
+  description: REST API for managing chart of accounts filter configurations in Oracle Fusion Cloud General
+    Ledger. The chart of accounts filters resource returns filter ID values for chart of accounts filter
+    criteria, enabling control over which account combinations are available for journal entry and financial
+    reporting based on defined filter rules and criteria.
+  image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Account Combinations
+  - Account Filters
+  - Chart of Accounts
+  - General Ledger
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  - type: GettingStarted
+    url: https://docs.oracle.com/en/cloud/saas/financials/25a/farfa/Quick_Start.html
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/Authentication.html
+  - type: ChangeLog
+    url: https://docs.oracle.com/en/cloud/saas/readiness/erp/index.html
+  contact:
+  - FN: Oracle Support
+    email: support@oracle.com
+    url: https://support.oracle.com
+  aid: oracle-financials:chart-of-accounts-filters
+- name: Oracle Intercompany Transactions REST API
+  description: REST API for managing intercompany transactions in Oracle Fusion Cloud Financials. The
+    intercompany resources support agreement-based intercompany transactions, intercompany transaction
+    source documents, intercompany agreements with transfer authorization groups, and intercompany organization
+    lookups. These APIs enable automated cross-charge processing and intercompany balancing within the
+    general ledger.
+  image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Cross-Charge
+  - General Ledger
+  - Intercompany
+  - Transfer Pricing
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/financials/25c/farfa/automated-intercompany-cross-charge-of-payables-invoices-using-rest-apis.html
+  - type: GettingStarted
+    url: https://docs.oracle.com/en/cloud/saas/financials/25a/farfa/Quick_Start.html
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/Authentication.html
+  - type: ChangeLog
+    url: https://docs.oracle.com/en/cloud/saas/readiness/erp/index.html
+  contact:
+  - FN: Oracle Support
+    email: support@oracle.com
+    url: https://support.oracle.com
+  aid: oracle-financials:intercompany-transactions
+- name: Oracle Joint Venture General Ledger Transactions REST API
+  description: REST API for managing joint venture general ledger transactions in Oracle Fusion Cloud
+    Financials. The joint venture GL transactions and joint venture subledger transactions resources enable
+    viewing and updating transactions related to joint venture accounting, supporting partnership accounting
+    workflows that integrate with the general ledger.
+  image: https://www.oracle.com/a/ocom/img/oracle-logo.svg
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - General Ledger
+  - Joint Venture
+  - Partnership Accounting
+  - Subledger Accounting
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  - type: Reference
+    url: https://docs.oracle.com/en/cloud/saas/financials/24c/farfa/op-jointventuregltransactions-get.html
+  - type: GettingStarted
+    url: https://docs.oracle.com/en/cloud/saas/financials/25a/farfa/Quick_Start.html
+  - type: Authentication
+    url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/Authentication.html
+  - type: ChangeLog
+    url: https://docs.oracle.com/en/cloud/saas/readiness/erp/index.html
+  contact:
+  - FN: Oracle Support
+    email: support@oracle.com
+    url: https://support.oracle.com
+  aid: oracle-financials:joint-venture-transactions
+- aid: oracle-financials:oracle-general-ledger-accounting-periods-api
+  name: Oracle Financials Accounting Periods API
+  description: The Accounting Periods API from Oracle General Ledger — 1 operation(s) for accounting periods.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Accounting Periods
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-accounting-periods-api-openapi.yml
+- aid: oracle-financials:oracle-general-ledger-budgetary-control-api
+  name: Oracle Financials Budgetary Control API
+  description: The Budgetary Control API from Oracle General Ledger — 1 operation(s) for budgetary control.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Budgetary Control
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-budgetary-control-api-openapi.yml
+- aid: oracle-financials:oracle-general-ledger-erp-integrations-api
+  name: Oracle Financials ERP Integrations API
+  description: The ERP Integrations API from Oracle General Ledger — 1 operation(s) for erp integrations.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - ERP Integration
+  tags_raw:
+  - ERP Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-erp-integrations-api-openapi.yml
+- aid: oracle-financials:oracle-general-ledger-intercompany-api
+  name: Oracle Financials Intercompany API
+  description: The Intercompany API from Oracle General Ledger — 1 operation(s) for intercompany.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Intercompany
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-intercompany-api-openapi.yml
+- aid: oracle-financials:oracle-general-ledger-journal-batches-api
+  name: Oracle Financials Journal Batches API
+  description: The Journal Batches API from Oracle General Ledger — 2 operation(s) for journal batches.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Journal Batches
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-journal-batches-api-openapi.yml
+- aid: oracle-financials:oracle-general-ledger-ledger-balances-api
+  name: Oracle Financials Balances API
+  description: The Ledger Balances API from Oracle General Ledger — 1 operation(s) for ledger balances.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Ledger balances
+  tags_raw:
+  - Ledger Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-ledger-balances-api-openapi.yml
+- aid: oracle-financials:oracle-general-ledger-ledger-options-api
+  name: Oracle Financials Options API
+  description: The Ledger Options API from Oracle General Ledger — 1 operation(s) for ledger options.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+  baseURL: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Ledger Options
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-general-ledger-ledger-options-api-openapi.yml
+- name: Oracle Purchasing API
+  description: API for managing purchase orders, requisitions, and procurement operations.
+  image: https://www.oracle.com/a/ocom/img/oracle-financials-icon.png
+  humanUrl: https://docs.oracle.com/cd/E18727_01/doc.121/e13513/toc.htm
+  baseUrl: https://your-instance.oracle.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Procurement
+  - Purchase Orders
+  - Purchasing
+  - Requisitions
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/cd/E18727_01/doc.121/e13513/T302934T531415.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/procurement/r13-update17d/oaprc/api-purchasing.html
+  contact:
+  - type: Support
+    url: https://support.oracle.com
+  aid: oracle-financials:purchasing
+- name: Oracle Expenses API
+  description: API for managing employee expenses, expense reports, and reimbursements.
+  image: https://www.oracle.com/a/ocom/img/oracle-financials-icon.png
+  humanUrl: https://docs.oracle.com/cd/E18727_01/doc.121/e13548/toc.htm
+  baseUrl: https://your-instance.oracle.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Expense Reports
+  - Expenses
+  - Reimbursement
+  - Travel
+  tags_raw:
+  - Expense Reports
+  - Expenses
+  - Reimbursements
+  - Travel
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/cd/E18727_01/doc.121/e13548/T302934T531415.htm
+  - type: API Guide
+    url: https://docs.oracle.com/en/cloud/saas/financials/r13-update17d/fafrs/api-expenses.html
+  contact:
+  - type: Support
+    url: https://support.oracle.com
+  aid: oracle-financials:expenses
+- name: Oracle Projects API
+  description: API for managing projects, project costs, and project billing.
+  image: https://www.oracle.com/a/ocom/img/oracle-financials-icon.png
+  humanUrl: https://docs.oracle.com/cd/E18727_01/doc.121/e13523/toc.htm
+  baseUrl: https://your-instance.oracle.com/fscmRestApi/resources/11.13.18.05
+  tags:
+  - Contracts
+  - Project Billing
+  - Project Costing
+  - Project
+  tags_raw:
+  - Contracts
+  - Project Billing
+  - Project Costing
+  - Projects
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/cd/E18727_01/doc.121/e13523/T302934T531415.htm
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/project-management/r13-update17d/oapjm/api-projects.html
+  contact:
+  - type: Support
+    url: https://support.oracle.com
+  aid: oracle-financials:projects
 common:
 - type: Website
   url: https://oracle.com
