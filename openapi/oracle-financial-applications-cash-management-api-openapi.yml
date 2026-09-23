@@ -1,0 +1,81 @@
+openapi: 3.2.0
+info:
+  title: Oracle Financials Cloud REST Cash Management API
+  description: REST API surface for Oracle Fusion Cloud Financials.
+  version: 11.13.18.05
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+servers:
+- url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  description: Customer Fusion Cloud Financials base URL.
+  variables:
+    instance:
+      default: example
+      description: Customer-specific Oracle Cloud instance.
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: Cash Management
+  description: Bank accounts and statements.
+paths:
+  /cashCashBalancesUploads:
+    get:
+      tags:
+      - Cash Management
+      summary: List cash balance uploads
+      operationId: listCashBalanceUploads
+      responses:
+        '200':
+          description: Cash balance uploads.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication with Oracle Cloud user credentials.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 Bearer token from Oracle IDCS / IAM.
+externalDocs:
+  description: Oracle Financials Cloud REST API Documentation
+  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html

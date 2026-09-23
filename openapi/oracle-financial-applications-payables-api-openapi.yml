@@ -1,0 +1,150 @@
+openapi: 3.2.0
+info:
+  title: Oracle Financials Cloud REST Payables API
+  description: REST API surface for Oracle Fusion Cloud Financials.
+  version: 11.13.18.05
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+servers:
+- url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  description: Customer Fusion Cloud Financials base URL.
+  variables:
+    instance:
+      default: example
+      description: Customer-specific Oracle Cloud instance.
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: Payables
+  description: Accounts Payable invoices.
+paths:
+  /invoices:
+    get:
+      tags:
+      - Payables
+      summary: List payables invoices
+      operationId: listInvoices
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Q'
+      responses:
+        '200':
+          description: Invoices collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+    post:
+      tags:
+      - Payables
+      summary: Create a payables invoice
+      operationId: createInvoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Invoice created.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /invoices/{InvoiceId}:
+    parameters:
+    - name: InvoiceId
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Payables
+      summary: Get a payables invoice
+      operationId: getInvoice
+      responses:
+        '200':
+          description: Invoice resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25
+        maximum: 500
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 'Oracle filter expression (e.g. `Status=''Posted''`).
+
+        '
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication with Oracle Cloud user credentials.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 Bearer token from Oracle IDCS / IAM.
+externalDocs:
+  description: Oracle Financials Cloud REST API Documentation
+  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html

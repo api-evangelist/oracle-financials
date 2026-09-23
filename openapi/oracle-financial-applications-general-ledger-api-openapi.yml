@@ -1,0 +1,229 @@
+openapi: 3.2.0
+info:
+  title: Oracle Financials Cloud REST General Ledger API
+  description: REST API surface for Oracle Fusion Cloud Financials.
+  version: 11.13.18.05
+  contact:
+    name: Oracle Support
+    url: https://support.oracle.com
+servers:
+- url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  description: Customer Fusion Cloud Financials base URL.
+  variables:
+    instance:
+      default: example
+      description: Customer-specific Oracle Cloud instance.
+security:
+- basicAuth: []
+- bearerAuth: []
+tags:
+- name: General Ledger
+  description: General Ledger journal batches and currency rates.
+paths:
+  /journalBatches:
+    get:
+      tags:
+      - General Ledger
+      summary: List journal batches
+      operationId: listJournalBatches
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Q'
+      responses:
+        '200':
+          description: Journal batches collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags:
+      - General Ledger
+      summary: Create a journal batch
+      operationId: createJournalBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Journal batch created.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /journalBatches/{JournalBatchesUniqID}:
+    parameters:
+    - $ref: '#/components/parameters/JournalBatchesUniqID'
+    get:
+      tags:
+      - General Ledger
+      summary: Get a journal batch
+      operationId: getJournalBatch
+      responses:
+        '200':
+          description: Journal batch resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+    patch:
+      tags:
+      - General Ledger
+      summary: Update a journal batch
+      operationId: updateJournalBatch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated journal batch.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /currencyRates:
+    get:
+      tags:
+      - General Ledger
+      summary: List currency rates
+      operationId: listCurrencyRates
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Q'
+      responses:
+        '200':
+          description: Currency rates collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+  /currencyRates/{currencyRatesUniqID}:
+    parameters:
+    - name: currencyRatesUniqID
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - General Ledger
+      summary: Get a currency rate
+      operationId: getCurrencyRate
+      responses:
+        '200':
+          description: Currency rate resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        o:errorCode:
+          type: string
+  parameters:
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+    JournalBatchesUniqID:
+      name: JournalBatchesUniqID
+      in: path
+      required: true
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25
+        maximum: 500
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        type: string
+      description: 'Oracle filter expression (e.g. `Status=''Posted''`).
+
+        '
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication with Oracle Cloud user credentials.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 Bearer token from Oracle IDCS / IAM.
+externalDocs:
+  description: Oracle Financials Cloud REST API Documentation
+  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html

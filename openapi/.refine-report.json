@@ -1,11 +1,7 @@
 {
   "provider": "oracle-financials",
   "sources": [
-    "oracle-financials-budgetary-control-api-openapi.yml",
-    "oracle-financials-chart-of-accounts-api-openapi.yml",
-    "oracle-financials-currency-rates-api-openapi.yml",
-    "oracle-financials-journal-batches-api-openapi.yml",
-    "oracle-financials-ledger-balances-api-openapi.yml"
+    "_original/oracle-financials-general-ledger-openapi.yml"
   ],
   "outputs": [
     "oracle-financials-budgetary-control-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "oracle-financials-general-ledger-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "oracle-financials-budgetary-control-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-financials-chart-of-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-financials-currency-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-financials-journal-batches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "oracle-financials-ledger-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
