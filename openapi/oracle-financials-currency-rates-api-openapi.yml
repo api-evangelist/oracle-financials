@@ -66,6 +66,13 @@ components:
       description: Comma-separated list of fields to sort by, with optional asc or desc
       schema:
         type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 25
     offset:
       name: offset
       in: query
@@ -79,23 +86,16 @@ components:
       description: Comma-separated list of fields to include in the response
       schema:
         type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 25
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
-      schema:
-        type: string
     finder:
       name: finder
       in: query
       description: Named finder to execute a predefined query
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
       schema:
         type: string
   schemas:

@@ -1,3 +1,5 @@
+# x-archived-from: oracle-general-ledger-intercompany-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.2.0
 info:
   title: Oracle General Ledger REST Intercompany API

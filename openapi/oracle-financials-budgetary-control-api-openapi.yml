@@ -1,16 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Oracle Financials General Ledger Budgetary Control API
-  description: REST API for Oracle Fusion Cloud Financials General Ledger, providing programmatic access to journal batches, journal entries, ledger balances, currency rates, chart of accounts filters, and budgetary control. The API supports creating, retrieving, updating, and deleting journal batches, viewing account balances for any account combination or account group, and managing currency conversion rates used across the financial system.
+  title: Oracle Financials Budgetary Control API
   version: 11.13.18.05
-  contact:
-    name: Oracle Support
-    url: https://support.oracle.com
-    email: support@oracle.com
-  license:
-    name: Oracle Cloud Services Agreement
-    url: https://www.oracle.com/corporate/contracts/cloud-services/
-  termsOfService: https://www.oracle.com/corporate/contracts/cloud-services/
+  description: 'Operations tagged Budgetary Control across 2 of this provider''s published API definitions: oracle-financials-general-ledger-openapi.yml, oracle-general-ledger-budgetary-control-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{instance}.oraclecloud.com
   description: Oracle Fusion Cloud Instance
@@ -18,8 +10,12 @@ servers:
     instance:
       default: servername
       description: Your Oracle Cloud instance identifier
-security:
-- bearerAuth: []
+- url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  description: Customer Oracle Cloud instance.
+  variables:
+    instance:
+      default: example
+      description: Customer-specific Oracle Cloud instance.
 tags:
 - name: Budgetary Control
   description: Manage budget transactions and view budgetary control validation results
@@ -57,6 +53,15 @@ paths:
                     description: Whether more items are available
         '401':
           description: Unauthorized - invalid or missing credentials
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://{instance}.oraclecloud.com
+      description: Oracle Fusion Cloud Instance
+      variables:
+        instance:
+          default: servername
+          description: Your Oracle Cloud instance identifier
   /fscmRestApi/resources/11.13.18.05/budgetaryControlBudgetTransactions:
     post:
       operationId: createBudgetTransaction
@@ -81,7 +86,116 @@ paths:
           description: Bad request - invalid transaction data
         '401':
           description: Unauthorized - invalid or missing credentials
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://{instance}.oraclecloud.com
+      description: Oracle Fusion Cloud Instance
+      variables:
+        instance:
+          default: servername
+          description: Your Oracle Cloud instance identifier
+  /fedBudgetExecutionControls:
+    get:
+      tags:
+      - Budgetary Control
+      summary: List budget execution controls
+      operationId: listBudgetExecutionControls
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Budget execution controls collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+      security:
+      - basicAuth: []
+      - bearerAuth: []
+    servers:
+    - url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+      description: Customer Oracle Cloud instance.
+      variables:
+        instance:
+          default: example
+          description: Customer-specific Oracle Cloud instance.
 components:
+  schemas:
+    BudgetTransaction:
+      type: object
+      description: A budget transaction for entering or adjusting budget amounts
+      properties:
+        BudgetName:
+          type: string
+          description: Name of the budget
+        LedgerId:
+          type: integer
+          description: Unique identifier of the ledger
+        AccountingPeriod:
+          type: string
+          description: Accounting period for the budget entry
+        AccountCombination:
+          type: string
+          description: Account combination for the budget amount
+        Amount:
+          type: number
+          description: Budget amount
+        CurrencyCode:
+          type: string
+          description: ISO 4217 currency code
+          pattern: ^[A-Z]{3}$
+    BudgetaryControlResult:
+      type: object
+      description: Result of budgetary control validation for a transaction
+      properties:
+        TransactionId:
+          type: integer
+          description: Identifier of the validated transaction
+        BudgetName:
+          type: string
+          description: Name of the budget used for validation
+        Status:
+          type: string
+          description: Validation result status
+        FundsAvailable:
+          type: number
+          description: Amount of funds available in the budget
+        FundsConsumed:
+          type: number
+          description: Amount of funds consumed by the transaction
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
   parameters:
     offset:
       name: offset
@@ -115,55 +229,31 @@ components:
       description: Filter expression using Oracle REST query syntax
       schema:
         type: string
-  schemas:
-    BudgetaryControlResult:
-      type: object
-      description: Result of budgetary control validation for a transaction
-      properties:
-        TransactionId:
-          type: integer
-          description: Identifier of the validated transaction
-        BudgetName:
-          type: string
-          description: Name of the budget used for validation
-        Status:
-          type: string
-          description: Validation result status
-        FundsAvailable:
-          type: number
-          description: Amount of funds available in the budget
-        FundsConsumed:
-          type: number
-          description: Amount of funds consumed by the transaction
-    BudgetTransaction:
-      type: object
-      description: A budget transaction for entering or adjusting budget amounts
-      properties:
-        BudgetName:
-          type: string
-          description: Name of the budget
-        LedgerId:
-          type: integer
-          description: Unique identifier of the ledger
-        AccountingPeriod:
-          type: string
-          description: Accounting period for the budget entry
-        AccountCombination:
-          type: string
-          description: Account combination for the budget amount
-        Amount:
-          type: number
-          description: Budget amount
-        CurrencyCode:
-          type: string
-          description: ISO 4217 currency code
-          pattern: ^[A-Z]{3}$
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25
+        maximum: 500
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
       description: OAuth 2.0 bearer token obtained from Oracle Identity Cloud Service
-externalDocs:
-  description: Oracle Fusion Cloud Financials REST API Documentation
-  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication with Oracle Cloud user credentials.
+x-refined-from:
+- oracle-financials-general-ledger-openapi.yml
+- oracle-general-ledger-budgetary-control-api-openapi.yml

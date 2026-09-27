@@ -1,16 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Oracle Financials General Ledger Journal Batches API
-  description: REST API for Oracle Fusion Cloud Financials General Ledger, providing programmatic access to journal batches, journal entries, ledger balances, currency rates, chart of accounts filters, and budgetary control. The API supports creating, retrieving, updating, and deleting journal batches, viewing account balances for any account combination or account group, and managing currency conversion rates used across the financial system.
+  title: Oracle Financials Journal Batches API
   version: 11.13.18.05
-  contact:
-    name: Oracle Support
-    url: https://support.oracle.com
-    email: support@oracle.com
-  license:
-    name: Oracle Cloud Services Agreement
-    url: https://www.oracle.com/corporate/contracts/cloud-services/
-  termsOfService: https://www.oracle.com/corporate/contracts/cloud-services/
+  description: 'Operations tagged Journal Batches across 2 of this provider''s published API definitions: oracle-financials-general-ledger-openapi.yml, oracle-general-ledger-journal-batches-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{instance}.oraclecloud.com
   description: Oracle Fusion Cloud Instance
@@ -18,8 +10,12 @@ servers:
     instance:
       default: servername
       description: Your Oracle Cloud instance identifier
-security:
-- bearerAuth: []
+- url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+  description: Customer Oracle Cloud instance.
+  variables:
+    instance:
+      default: example
+      description: Customer-specific Oracle Cloud instance.
 tags:
 - name: Journal Batches
   description: Manage journal batches including headers, lines, action logs, and attachments
@@ -67,6 +63,15 @@ paths:
           description: Unauthorized - invalid or missing credentials
         '403':
           description: Forbidden - insufficient privileges
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://{instance}.oraclecloud.com
+      description: Oracle Fusion Cloud Instance
+      variables:
+        instance:
+          default: servername
+          description: Your Oracle Cloud instance identifier
   /fscmRestApi/resources/11.13.18.05/journalBatches/{JeBatchId}:
     get:
       operationId: getJournalBatch
@@ -89,6 +94,8 @@ paths:
           description: Unauthorized - invalid or missing credentials
         '404':
           description: Journal batch not found
+      security:
+      - bearerAuth: []
     patch:
       operationId: updateJournalBatch
       summary: Oracle Financials Update a journal batch
@@ -116,6 +123,8 @@ paths:
           description: Unauthorized - invalid or missing credentials
         '404':
           description: Journal batch not found
+      security:
+      - bearerAuth: []
     delete:
       operationId: deleteJournalBatch
       summary: Oracle Financials Delete a journal batch
@@ -131,8 +140,138 @@ paths:
           description: Unauthorized - invalid or missing credentials
         '404':
           description: Journal batch not found
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://{instance}.oraclecloud.com
+      description: Oracle Fusion Cloud Instance
+      variables:
+        instance:
+          default: servername
+          description: Your Oracle Cloud instance identifier
+  /journalBatches:
+    get:
+      tags:
+      - Journal Batches
+      summary: List journal batches
+      operationId: getJournalBatches
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Q'
+      responses:
+        '200':
+          description: Journal batches collection.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+      - basicAuth: []
+      - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: listJournalBatches
+    servers:
+    - url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+      description: Customer Oracle Cloud instance.
+      variables:
+        instance:
+          default: example
+          description: Customer-specific Oracle Cloud instance.
+  /journalBatches/{JournalBatchesUniqID}:
+    parameters:
+    - name: JournalBatchesUniqID
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+      - Journal Batches
+      summary: Get a journal batch
+      operationId: getJournalBatchesByJournalBatchesUniqID
+      responses:
+        '200':
+          description: Journal batch resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      security:
+      - basicAuth: []
+      - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: getJournalBatch
+    patch:
+      tags:
+      - Journal Batches
+      summary: Update a journal batch
+      operationId: patchJournalBatchesByJournalBatchesUniqID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated journal batch.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      security:
+      - basicAuth: []
+      - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: updateJournalBatch
+    delete:
+      tags:
+      - Journal Batches
+      summary: Delete a journal batch
+      operationId: deleteJournalBatchesByJournalBatchesUniqID
+      responses:
+        '204':
+          description: Deleted.
+      security:
+      - basicAuth: []
+      - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteJournalBatch
+    servers:
+    - url: https://{instance}.oraclecloud.com/fscmRestApi/resources/11.13.18.05
+      description: Customer Oracle Cloud instance.
+      variables:
+        instance:
+          default: example
+          description: Customer-specific Oracle Cloud instance.
 components:
   parameters:
+    orderBy:
+      name: orderBy
+      in: query
+      description: Comma-separated list of fields to sort by, with optional asc or desc
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 25
+    offset:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results
+      schema:
+        type: integer
+        default: 0
     JeBatchId:
       name: JeBatchId
       in: path
@@ -146,36 +285,10 @@ components:
       description: Comma-separated list of child resources to expand in the response
       schema:
         type: string
-    orderBy:
-      name: orderBy
-      in: query
-      description: Comma-separated list of fields to sort by, with optional asc or desc
-      schema:
-        type: string
-    offset:
-      name: offset
-      in: query
-      description: Number of items to skip before returning results
-      schema:
-        type: integer
-        default: 0
     fields:
       name: fields
       in: query
       description: Comma-separated list of fields to include in the response
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 25
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
       schema:
         type: string
     finder:
@@ -184,6 +297,34 @@ components:
       description: Named finder to execute a predefined query
       schema:
         type: string
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25
+        maximum: 500
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Oracle filter expression.
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
   schemas:
     JournalBatchUpdate:
       type: object
@@ -245,12 +386,65 @@ components:
           type: string
           format: date-time
           description: Timestamp when the batch was last modified
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    ErrorResponse:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        o:errorCode:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
       description: OAuth 2.0 bearer token obtained from Oracle Identity Cloud Service
-externalDocs:
-  description: Oracle Fusion Cloud Financials REST API Documentation
-  url: https://docs.oracle.com/en/cloud/saas/financials/26a/farfa/index.html
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication with Oracle Cloud user credentials.
+x-refined-from:
+- oracle-financials-general-ledger-openapi.yml
+- oracle-general-ledger-journal-batches-api-openapi.yml

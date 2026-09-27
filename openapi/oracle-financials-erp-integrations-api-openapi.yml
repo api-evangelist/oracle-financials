@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Oracle General Ledger REST Ledger Balances API
+  title: Oracle General Ledger REST ERP Integrations API
   description: 'Oracle Fusion Cloud General Ledger REST API. Resources are exposed
 
     under `/fscmRestApi/resources/11.13.18.05/{resource}` on each
@@ -32,83 +32,66 @@ security:
 - basicAuth: []
 - bearerAuth: []
 tags:
-- name: Ledger Balances
+- name: ERP Integrations
 paths:
-  /ledgerBalances:
-    get:
+  /erpintegrations:
+    post:
       tags:
-      - Ledger Balances
-      summary: List ledger balances
-      operationId: listLedgerBalances
-      parameters:
-      - $ref: '#/components/parameters/Limit'
-      - $ref: '#/components/parameters/Offset'
-      - name: finder
-        in: query
-        required: false
-        schema:
-          type: string
-        description: 'Oracle finder name, e.g. `AccountBalanceByCombinationFinder` or
+      - ERP Integrations
+      summary: Submit an ERP integration operation
+      description: 'Submit operations such as `uploadFileToUCM`, `submitESSJobRequest`,
 
-          `AccountGroupBalanceFinder`.
+        or `importBulkData`. The actual operation name is supplied in the
 
-          '
+        request body''s `OperationName` field.'
+      operationId: submitErpIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - OperationName
+              properties:
+                OperationName:
+                  type: string
+                  description: 'e.g. `uploadFileToUCM`, `submitESSJobRequest`,
+
+                    `submitImportActivity`, `getESSJobStatus`.
+
+                    '
+              additionalProperties: true
       responses:
-        '200':
-          description: Ledger balances collection.
+        '201':
+          description: Operation accepted.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceCollection'
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ResourceCollection:
+    ErrorResponse:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        count:
+        title:
+          type: string
+        status:
           type: integer
-        hasMore:
-          type: boolean
-        limit:
-          type: integer
-        offset:
-          type: integer
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      properties:
-        rel:
+        detail:
           type: string
-        href:
+        o:errorCode:
           type: string
-        name:
-          type: string
-        kind:
-          type: string
-  parameters:
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 0
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 25
-        maximum: 500
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

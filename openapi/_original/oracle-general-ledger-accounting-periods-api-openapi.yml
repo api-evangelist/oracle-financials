@@ -1,6 +1,8 @@
+# x-archived-from: oracle-general-ledger-accounting-periods-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.2.0
 info:
-  title: Oracle General Ledger REST Ledger Options API
+  title: Oracle General Ledger REST Accounting Periods API
   description: 'Oracle Fusion Cloud General Ledger REST API. Resources are exposed
 
     under `/fscmRestApi/resources/11.13.18.05/{resource}` on each
@@ -32,26 +34,38 @@ security:
 - basicAuth: []
 - bearerAuth: []
 tags:
-- name: Ledger Options
+- name: Accounting Periods
 paths:
-  /fedLedgerOptions:
+  /accountingPeriodStatusLOV:
     get:
       tags:
-      - Ledger Options
-      summary: List ledger options
-      operationId: listLedgerOptions
+      - Accounting Periods
+      summary: List accounting period statuses
+      operationId: listAccountingPeriodStatus
       parameters:
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Q'
       responses:
         '200':
-          description: Ledger options collection.
+          description: Accounting period status list of values.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceCollection'
 components:
   schemas:
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
     ResourceCollection:
       type: object
       properties:
@@ -72,17 +86,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        name:
-          type: string
-        kind:
-          type: string
   parameters:
     Offset:
       name: offset
@@ -99,6 +102,13 @@ components:
         type: integer
         default: 25
         maximum: 500
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Oracle filter expression.
   securitySchemes:
     basicAuth:
       type: http

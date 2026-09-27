@@ -1,6 +1,8 @@
+# x-archived-from: oracle-financial-applications-payables-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.2.0
 info:
-  title: Oracle Financials Cloud REST General Ledger API
+  title: Oracle Financials Cloud REST Payables API
   description: REST API surface for Oracle Fusion Cloud Financials.
   version: 11.13.18.05
   contact:
@@ -17,33 +19,31 @@ security:
 - basicAuth: []
 - bearerAuth: []
 tags:
-- name: General Ledger
-  description: General Ledger journal batches and currency rates.
+- name: Payables
+  description: Accounts Payable invoices.
 paths:
-  /journalBatches:
+  /invoices:
     get:
       tags:
-      - General Ledger
-      summary: List journal batches
-      operationId: listJournalBatches
+      - Payables
+      summary: List payables invoices
+      operationId: listInvoices
       parameters:
       - $ref: '#/components/parameters/Limit'
       - $ref: '#/components/parameters/Offset'
       - $ref: '#/components/parameters/Q'
       responses:
         '200':
-          description: Journal batches collection.
+          description: Invoices collection.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceCollection'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
     post:
       tags:
-      - General Ledger
-      summary: Create a journal batch
-      operationId: createJournalBatch
+      - Payables
+      summary: Create a payables invoice
+      operationId: createInvoice
       requestBody:
         required: true
         content:
@@ -53,80 +53,27 @@ paths:
               additionalProperties: true
       responses:
         '201':
-          description: Journal batch created.
+          description: Invoice created.
           content:
             application/json:
               schema:
                 type: object
                 additionalProperties: true
-  /journalBatches/{JournalBatchesUniqID}:
+  /invoices/{InvoiceId}:
     parameters:
-    - $ref: '#/components/parameters/JournalBatchesUniqID'
-    get:
-      tags:
-      - General Ledger
-      summary: Get a journal batch
-      operationId: getJournalBatch
-      responses:
-        '200':
-          description: Journal batch resource.
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-    patch:
-      tags:
-      - General Ledger
-      summary: Update a journal batch
-      operationId: updateJournalBatch
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: true
-      responses:
-        '200':
-          description: Updated journal batch.
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-  /currencyRates:
-    get:
-      tags:
-      - General Ledger
-      summary: List currency rates
-      operationId: listCurrencyRates
-      parameters:
-      - $ref: '#/components/parameters/Limit'
-      - $ref: '#/components/parameters/Offset'
-      - $ref: '#/components/parameters/Q'
-      responses:
-        '200':
-          description: Currency rates collection.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceCollection'
-  /currencyRates/{currencyRatesUniqID}:
-    parameters:
-    - name: currencyRatesUniqID
+    - name: InvoiceId
       in: path
       required: true
       schema:
         type: string
     get:
       tags:
-      - General Ledger
-      summary: Get a currency rate
-      operationId: getCurrencyRate
+      - Payables
+      summary: Get a payables invoice
+      operationId: getInvoice
       responses:
         '200':
-          description: Currency rate resource.
+          description: Invoice resource.
           content:
             application/json:
               schema:
@@ -165,17 +112,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
-    ErrorResponse:
-      type: object
-      properties:
-        title:
-          type: string
-        status:
-          type: integer
-        detail:
-          type: string
-        o:errorCode:
-          type: string
   parameters:
     Offset:
       name: offset
@@ -184,12 +120,6 @@ components:
       schema:
         type: integer
         default: 0
-    JournalBatchesUniqID:
-      name: JournalBatchesUniqID
-      in: path
-      required: true
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -207,13 +137,6 @@ components:
       description: 'Oracle filter expression (e.g. `Status=''Posted''`).
 
         '
-  responses:
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
