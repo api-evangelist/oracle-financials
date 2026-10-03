@@ -35,17 +35,6 @@ paths:
                 $ref: '#/components/schemas/ResourceCollection'
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        name:
-          type: string
-        kind:
-          type: string
     ResourceCollection:
       type: object
       properties:
@@ -66,6 +55,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

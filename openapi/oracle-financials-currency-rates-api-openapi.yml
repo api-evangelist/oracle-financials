@@ -60,10 +60,10 @@ paths:
           description: Unauthorized - invalid or missing credentials
 components:
   parameters:
-    orderBy:
-      name: orderBy
+    finder:
+      name: finder
       in: query
-      description: Comma-separated list of fields to sort by, with optional asc or desc
+      description: Named finder to execute a predefined query
       schema:
         type: string
     limit:
@@ -80,22 +80,22 @@ components:
       schema:
         type: integer
         default: 0
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
+      schema:
+        type: string
     fields:
       name: fields
       in: query
       description: Comma-separated list of fields to include in the response
       schema:
         type: string
-    finder:
-      name: finder
+    orderBy:
+      name: orderBy
       in: query
-      description: Named finder to execute a predefined query
-      schema:
-        type: string
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
+      description: Comma-separated list of fields to sort by, with optional asc or desc
       schema:
         type: string
   schemas:

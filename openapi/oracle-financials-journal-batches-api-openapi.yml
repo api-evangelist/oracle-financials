@@ -252,12 +252,19 @@ paths:
           description: Customer-specific Oracle Cloud instance.
 components:
   parameters:
-    orderBy:
-      name: orderBy
+    finder:
+      name: finder
       in: query
-      description: Comma-separated list of fields to sort by, with optional asc or desc
+      description: Named finder to execute a predefined query
       schema:
         type: string
+    JeBatchId:
+      name: JeBatchId
+      in: path
+      required: true
+      description: Unique identifier for the journal batch
+      schema:
+        type: integer
     limit:
       name: limit
       in: query
@@ -272,17 +279,16 @@ components:
       schema:
         type: integer
         default: 0
-    JeBatchId:
-      name: JeBatchId
-      in: path
-      required: true
-      description: Unique identifier for the journal batch
-      schema:
-        type: integer
     expand:
       name: expand
       in: query
       description: Comma-separated list of child resources to expand in the response
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
       schema:
         type: string
     fields:
@@ -291,16 +297,10 @@ components:
       description: Comma-separated list of fields to include in the response
       schema:
         type: string
-    finder:
-      name: finder
+    orderBy:
+      name: orderBy
       in: query
-      description: Named finder to execute a predefined query
-      schema:
-        type: string
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
+      description: Comma-separated list of fields to sort by, with optional asc or desc
       schema:
         type: string
     Limit:
@@ -311,13 +311,6 @@ components:
         type: integer
         default: 25
         maximum: 500
-    Q:
-      name: q
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Oracle filter expression.
     Offset:
       name: offset
       in: query
@@ -325,21 +318,14 @@ components:
       schema:
         type: integer
         default: 0
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Oracle filter expression.
   schemas:
-    JournalBatchUpdate:
-      type: object
-      description: Updatable fields for a journal batch, limited to completion status and reversal attributes
-      properties:
-        Status:
-          type: string
-          description: Updated status of the journal batch
-        ReversalDate:
-          type: string
-          format: date
-          description: Date for reversing the journal batch
-        ReversalPeriodName:
-          type: string
-          description: Accounting period name for the reversal
     JournalBatch:
       type: object
       description: A journal batch containing one or more journal entries for posting to the general ledger
@@ -386,17 +372,20 @@ components:
           type: string
           format: date-time
           description: Timestamp when the batch was last modified
-    Link:
+    JournalBatchUpdate:
       type: object
+      description: Updatable fields for a journal batch, limited to completion status and reversal attributes
       properties:
-        rel:
+        Status:
           type: string
-        href:
+          description: Updated status of the journal batch
+        ReversalDate:
           type: string
-        name:
+          format: date
+          description: Date for reversing the journal batch
+        ReversalPeriodName:
           type: string
-        kind:
-          type: string
+          description: Accounting period name for the reversal
     ResourceCollection:
       type: object
       properties:
@@ -427,6 +416,17 @@ components:
         detail:
           type: string
         o:errorCode:
+          type: string
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
           type: string
   responses:
     Unauthorized:
