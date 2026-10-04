@@ -109,6 +109,18 @@ components:
       description: Named finder to execute a predefined query
       schema:
         type: string
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
+      schema:
+        type: string
+    orderBy:
+      name: orderBy
+      in: query
+      description: Comma-separated list of fields to sort by, with optional asc or desc
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -123,24 +135,19 @@ components:
       schema:
         type: integer
         default: 0
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
-      schema:
-        type: string
     fields:
       name: fields
       in: query
       description: Comma-separated list of fields to include in the response
       schema:
         type: string
-    orderBy:
-      name: orderBy
+    Offset:
+      name: offset
       in: query
-      description: Comma-separated list of fields to sort by, with optional asc or desc
+      required: false
       schema:
-        type: string
+        type: integer
+        default: 0
     Limit:
       name: limit
       in: query
@@ -149,13 +156,6 @@ components:
         type: integer
         default: 25
         maximum: 500
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 0
   schemas:
     LedgerBalance:
       type: object
@@ -196,6 +196,17 @@ components:
           - B
           - E
           description: Balance type indicator where A is actual, B is budget, and E is encumbrance
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
     ResourceCollection:
       type: object
       properties:
@@ -216,17 +227,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        name:
-          type: string
-        kind:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

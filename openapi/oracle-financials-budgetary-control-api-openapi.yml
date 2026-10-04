@@ -123,6 +123,18 @@ paths:
           description: Customer-specific Oracle Cloud instance.
 components:
   parameters:
+    finder:
+      name: finder
+      in: query
+      description: Named finder to execute a predefined query
+      schema:
+        type: string
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -130,12 +142,6 @@ components:
       schema:
         type: integer
         default: 25
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
-      schema:
-        type: string
     offset:
       name: offset
       in: query
@@ -143,18 +149,19 @@ components:
       schema:
         type: integer
         default: 0
-    finder:
-      name: finder
-      in: query
-      description: Named finder to execute a predefined query
-      schema:
-        type: string
     fields:
       name: fields
       in: query
       description: Comma-separated list of fields to include in the response
       schema:
         type: string
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
     Limit:
       name: limit
       in: query
@@ -163,13 +170,6 @@ components:
         type: integer
         default: 25
         maximum: 500
-    Offset:
-      name: offset
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 0
   schemas:
     BudgetTransaction:
       type: object
@@ -213,6 +213,17 @@ components:
         FundsConsumed:
           type: number
           description: Amount of funds consumed by the transaction
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
     ResourceCollection:
       type: object
       properties:
@@ -233,17 +244,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        name:
-          type: string
-        kind:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

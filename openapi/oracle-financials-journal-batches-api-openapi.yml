@@ -258,13 +258,24 @@ components:
       description: Named finder to execute a predefined query
       schema:
         type: string
-    JeBatchId:
-      name: JeBatchId
-      in: path
-      required: true
-      description: Unique identifier for the journal batch
+    q:
+      name: q
+      in: query
+      description: Filter expression using Oracle REST query syntax
       schema:
-        type: integer
+        type: string
+    expand:
+      name: expand
+      in: query
+      description: Comma-separated list of child resources to expand in the response
+      schema:
+        type: string
+    orderBy:
+      name: orderBy
+      in: query
+      description: Comma-separated list of fields to sort by, with optional asc or desc
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -279,30 +290,26 @@ components:
       schema:
         type: integer
         default: 0
-    expand:
-      name: expand
-      in: query
-      description: Comma-separated list of child resources to expand in the response
+    JeBatchId:
+      name: JeBatchId
+      in: path
+      required: true
+      description: Unique identifier for the journal batch
       schema:
-        type: string
-    q:
-      name: q
-      in: query
-      description: Filter expression using Oracle REST query syntax
-      schema:
-        type: string
+        type: integer
     fields:
       name: fields
       in: query
       description: Comma-separated list of fields to include in the response
       schema:
         type: string
-    orderBy:
-      name: orderBy
+    Q:
+      name: q
       in: query
-      description: Comma-separated list of fields to sort by, with optional asc or desc
+      required: false
       schema:
         type: string
+      description: Oracle filter expression.
     Limit:
       name: limit
       in: query
@@ -318,14 +325,21 @@ components:
       schema:
         type: integer
         default: 0
-    Q:
-      name: q
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Oracle filter expression.
   schemas:
+    JournalBatchUpdate:
+      type: object
+      description: Updatable fields for a journal batch, limited to completion status and reversal attributes
+      properties:
+        Status:
+          type: string
+          description: Updated status of the journal batch
+        ReversalDate:
+          type: string
+          format: date
+          description: Date for reversing the journal batch
+        ReversalPeriodName:
+          type: string
+          description: Accounting period name for the reversal
     JournalBatch:
       type: object
       description: A journal batch containing one or more journal entries for posting to the general ledger
@@ -372,40 +386,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the batch was last modified
-    JournalBatchUpdate:
-      type: object
-      description: Updatable fields for a journal batch, limited to completion status and reversal attributes
-      properties:
-        Status:
-          type: string
-          description: Updated status of the journal batch
-        ReversalDate:
-          type: string
-          format: date
-          description: Date for reversing the journal batch
-        ReversalPeriodName:
-          type: string
-          description: Accounting period name for the reversal
-    ResourceCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        count:
-          type: integer
-        hasMore:
-          type: boolean
-        limit:
-          type: integer
-        offset:
-          type: integer
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
     ErrorResponse:
       type: object
       properties:
@@ -428,6 +408,26 @@ components:
           type: string
         kind:
           type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
   responses:
     Unauthorized:
       description: Missing or invalid credentials.

@@ -134,26 +134,6 @@ paths:
                 additionalProperties: true
 components:
   schemas:
-    ResourceCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        count:
-          type: integer
-        hasMore:
-          type: boolean
-        limit:
-          type: integer
-        offset:
-          type: integer
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
     ErrorResponse:
       type: object
       properties:
@@ -176,13 +156,36 @@ components:
           type: string
         kind:
           type: string
+    ResourceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        count:
+          type: integer
+        hasMore:
+          type: boolean
+        limit:
+          type: integer
+        offset:
+          type: integer
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
   parameters:
-    JournalBatchesUniqID:
-      name: JournalBatchesUniqID
-      in: path
-      required: true
+    Q:
+      name: q
+      in: query
+      required: false
       schema:
         type: string
+      description: 'Oracle filter expression (e.g. `Status=''Posted''`).
+
+        '
     Limit:
       name: limit
       in: query
@@ -198,15 +201,12 @@ components:
       schema:
         type: integer
         default: 0
-    Q:
-      name: q
-      in: query
-      required: false
+    JournalBatchesUniqID:
+      name: JournalBatchesUniqID
+      in: path
+      required: true
       schema:
         type: string
-      description: 'Oracle filter expression (e.g. `Status=''Posted''`).
-
-        '
   responses:
     Unauthorized:
       description: Missing or invalid credentials.
