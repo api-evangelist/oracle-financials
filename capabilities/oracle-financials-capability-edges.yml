@@ -12,8 +12,25 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 12
 edges:
+- tag: General Ledger
+  spec_file: oracle-financials-general-ledger-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.95
+  evidence: GET /journalBatches  listJournalBatches  List journal batches
+  reason: Journal batch lifecycle and currency rates are general ledger management operations.
+- tag: Payables
+  spec_file: oracle-financials-payables-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.95
+  evidence: POST /invoices  createInvoice  Create a payables invoice
+  reason: Operations explicitly create and list payables invoices — core supplier invoice processing,
+    i.e. Accounts Payable Management.
 - tag: Journal Batches
   spec_file: oracle-financials-journal-batches-api-openapi.yml
   capability_id: BC-200.10
@@ -22,6 +39,24 @@ edges:
   confidence: 0.92
   evidence: GET .../journalBatches listJournalBatches; PATCH updateJournalBatch
   reason: Journal batch/entry CRUD in Oracle Fusion General Ledger is core GL journal processing.
+- tag: Receivables
+  spec_file: oracle-financials-receivables-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.9
+  evidence: GET /receivablesCustomerTransactions  listReceivablesTransactions  List receivables customer
+    transactions
+  reason: Customer receivables transactions (invoices/credit memos) are Accounts Receivable Management;
+    no other reading fits.
+- tag: Fixed Assets
+  spec_file: oracle-financials-fixed-assets-api-openapi.yml
+  capability_id: BC-200.40
+  capability_id_l1: BC-200
+  capability_name: Fixed Asset Accounting
+  confidence: 0.88
+  evidence: GET /fixedAssets  listFixedAssets  List fixed assets
+  reason: Fixed asset register listing in an ERP financials API realises fixed asset accounting.
 - tag: Ledger Balances
   spec_file: oracle-financials-ledger-balances-api-openapi.yml
   capability_id: BC-200.10
@@ -30,6 +65,24 @@ edges:
   confidence: 0.88
   evidence: GET .../ledgerBalances listLedgerBalances List account balances
   reason: Retrieving GL account balances for account combinations is General Ledger Management.
+- tag: Accounting Periods
+  spec_file: oracle-financials-accounting-periods-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.8
+  evidence: GET /accountingPeriodStatusLOV  listAccountingPeriodStatus  List accounting period statuses
+  reason: Accounting period status in the General Ledger surface supports period close, part of general
+    ledger management; surface is thin (one LOV lookup).
+- tag: Cash Management
+  spec_file: oracle-financials-cash-management-api-openapi.yml
+  capability_id: BC-210.10
+  capability_id_l1: BC-210
+  capability_name: Cash Management
+  confidence: 0.8
+  evidence: GET /cashCashBalancesUploads  listCashBalanceUploads  List cash balance uploads
+  reason: Cash balance uploads represent cash positioning data in Oracle Cash Management, mapping to treasury
+    cash management.
 - tag: Chart of Accounts
   spec_file: oracle-financials-chart-of-accounts-api-openapi.yml
   capability_id: BC-200.10
@@ -39,6 +92,17 @@ edges:
   evidence: POST .../chartOfAccountsFilters createChartOfAccountsFilter Create a chart of accounts filter
   reason: Chart of accounts is explicitly part of General Ledger Management; operation manipulates COA
     filters within Fusion GL.
+- tag: Ledger Options
+  spec_file: oracle-financials-ledger-options-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.72
+  evidence: GET /fedLedgerOptions  listLedgerOptions  List ledger options
+  reason: Ledger configuration options within Oracle Fusion General Ledger; the spec frames it as part
+    of the GL surface alongside 'journal batches, ledger balances... ledger options, chart of accounts
+    filters'. Maps to General Ledger Management, though it is setup/reference data rather than transactional
+    accounting, hence moderate confidence.
 - tag: Budgetary Control
   spec_file: oracle-financials-budgetary-control-api-openapi.yml
   capability_id: BC-230.10
@@ -48,3 +112,12 @@ edges:
   evidence: POST .../budgetaryControlBudgetTransactions createBudgetTransaction Create a budget transaction
   reason: Budgetary control results and budget transactions relate to budget management/funds checking;
     closest fit is Budgeting Management, though it also borders GL controls.
+- tag: Intercompany
+  spec_file: oracle-financials-intercompany-api-openapi.yml
+  capability_id: BC-200.10
+  capability_id_l1: BC-200
+  capability_name: General Ledger Management
+  confidence: 0.7
+  evidence: POST /intercompanyTransactions  createIntercompanyTransaction  Create an intercompany transaction
+  reason: Intercompany transactions within the General Ledger REST surface are accounting entries between
+    entities, best placed under general ledger management; some ambiguity with treasury intercompany funding.
