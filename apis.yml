@@ -642,6 +642,10 @@ apis:
   - type: SDKs
     url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
 common:
+- type: Plans
+  url: plans/oracle-financials-plans-pricing.yml
+- type: FinOps
+  url: finops/oracle-financials-finops.yml
 - type: Website
   url: https://oracle.com
 - type: CapabilityMap
