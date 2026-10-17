@@ -60,6 +60,20 @@ paths:
           description: Unauthorized - invalid or missing credentials
 components:
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 25
     finder:
       name: finder
       in: query
@@ -78,20 +92,6 @@ components:
       description: Comma-separated list of fields to sort by, with optional asc or desc
       schema:
         type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 25
-    offset:
-      name: offset
-      in: query
-      description: Number of items to skip before returning results
-      schema:
-        type: integer
-        default: 0
     fields:
       name: fields
       in: query

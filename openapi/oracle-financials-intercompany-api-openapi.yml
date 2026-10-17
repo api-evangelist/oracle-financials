@@ -73,13 +73,6 @@ paths:
                 additionalProperties: true
 components:
   parameters:
-    Q:
-      name: q
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Oracle filter expression.
     Limit:
       name: limit
       in: query
@@ -95,18 +88,14 @@ components:
       schema:
         type: integer
         default: 0
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Oracle filter expression.
   schemas:
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        name:
-          type: string
-        kind:
-          type: string
     ResourceCollection:
       type: object
       properties:
@@ -127,6 +116,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        name:
+          type: string
+        kind:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

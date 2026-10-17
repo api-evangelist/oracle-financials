@@ -123,6 +123,20 @@ paths:
           description: Customer-specific Oracle Cloud instance.
 components:
   parameters:
+    offset:
+      name: offset
+      in: query
+      description: Number of items to skip before returning results
+      schema:
+        type: integer
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 25
     finder:
       name: finder
       in: query
@@ -135,20 +149,6 @@ components:
       description: Filter expression using Oracle REST query syntax
       schema:
         type: string
-    limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 25
-    offset:
-      name: offset
-      in: query
-      description: Number of items to skip before returning results
-      schema:
-        type: integer
-        default: 0
     fields:
       name: fields
       in: query
